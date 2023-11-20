@@ -5,7 +5,10 @@ import java.util.LinkedList;
 public class Test {  
 
     public static void main(String[] args) {
-        new GladiatorPrimeTest().rent(); 
+        //new GladiatorPrimeTest().rent(); 
+        Customers customers = new Customers();
+        customers.add();
+        customers.show();
     }  
 }
 

@@ -12,7 +12,7 @@ public class Customers extends Records
     
     public void add()
     {
-        System.out.println("Add a video");
+        System.out.println("Add a customer");
         Customer customer = new Customer(++id, In.readName("customer"));
         super.add(customer);
         System.out.println("\t\t" + customer + " added");
