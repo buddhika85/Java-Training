@@ -13,8 +13,8 @@ public class StreamedMovies extends Records {
     {
         System.out.println("Add a video");
         StreamedMovie movie = new StreamedMovie(++id, In.readName("Movie"), 
-            In.readDouble("Please enter Movie price : "), 
-            In.readInt("Please enter movie rental period: "));
+            In.readDouble("Please enter Movie price "), 
+            In.readInt("Please enter movie rental period "));
         super.add(movie);
         System.out.println("\t\t" + movie + " added");
     }
