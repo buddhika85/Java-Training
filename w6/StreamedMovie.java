@@ -1,22 +1,16 @@
 package w6;
 
-public class StreamedMovie {
+public class StreamedMovie extends Record {
     private double price;
-    private int id;
-    private String name;
+
     private int numDays;
     private Status status;
 
     public StreamedMovie(int id, String name, double price, int numDays, Status status) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.price = price;
         this.numDays = numDays;
         this.status = status;
-    }
-
-    public boolean matches(int id) {
-        return this.id == id;
     }
 
     public boolean rent() {
@@ -37,16 +31,8 @@ public class StreamedMovie {
         return status == Status.FOR_RENT;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void show() {
-        System.out.println(toString());
-    }
-
     public String toString() {
-        String str = id + " " + name + " " + numDays + " days";
+        String str = super.toString() + " " + numDays + " days";
         if (isAvailable())
             str += " is available for rent";
         return str;

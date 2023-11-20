@@ -2,15 +2,13 @@ package w6;
 
 import java.util.LinkedList;
 
-public class Customer {
-    private int id;
-    private String name;
+public class Customer extends Record {
+
     private double balance = 100.0;
     private LinkedList<StreamedMovie> movies = new LinkedList<StreamedMovie>();
 
     public Customer(int id, String name) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
 
     public void rent(StreamedMovie movie) {
@@ -20,12 +18,8 @@ public class Customer {
         }
     }
 
-    public void show() {
-        System.out.println(toString());
-    }
-
     public String toString() {
-        String str = id + "  " + name + " has ";
+        String str = super.toString() + " has ";
         for (StreamedMovie sm : movies)
             str += sm.toString() + ", ";
         if (movies.size() == 0)
@@ -33,15 +27,8 @@ public class Customer {
         return str;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public double getBalance() {
         return balance;
     }
 
-    public boolean matches(int id) {
-        return this.id == id;
-    }
 }
