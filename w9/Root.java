@@ -1,5 +1,9 @@
+import model.Pet;
+
 public class Root {
     public static void main(String[] args) {
-        new PetWindow();
+        Pet sharedModel = new Pet();
+        new PetWindow(sharedModel);
+        new PetLogger(sharedModel);
     }
 }
