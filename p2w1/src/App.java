@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+
+import lab.CruiseShip;
+import lab.Passenger;
+
 public class App {
     public static void main(String[] args) {
         // Printer printer = new Printer("Lab Printer", 5, true, true);
@@ -14,21 +19,57 @@ public class App {
 
         // System.out.println("\n" + printer + "\n");
 
-        //coneptCheck();
+        //conceptCheck();
 
-        var point = new Point();
+        // var point = new Point();
       
-        point.shift(10, 10);    // 1
-        point.quadrant();       
-        point.shift(-11, 0);   // 2
-        point.quadrant();
-        point.shift(0, -11);           // 3
-        point.quadrant();
-        point.shift(1, 0);            // 4
-        point.quadrant();
+        // point.shift(10, 10);    // 1
+        // point.quadrant();       
+        // point.shift(-11, 0);   // 2
+        // point.quadrant();
+        // point.shift(0, -11);           // 3
+        // point.quadrant();
+        // point.shift(1, 0);            // 4
+        // point.quadrant();
+
+
+        // Test lab
+        testLab();
+
     }
 
-    private static void coneptCheck() {
+    private static void testLab() {      
+        var jack = new Passenger("Jack", "London", "New York");
+        var gill = new Passenger("Gill", "Parris", "New York");
+        var james = new Passenger("James", "Brighton", "Parris");
+
+        var itenary = new ArrayList<String>();        
+        itenary.add("London");
+        itenary.add("Brighton");
+        itenary.add("Parris");
+        itenary.add("New York");
+
+        var cruiseShip = new CruiseShip("Summer Travels", 10, itenary);
+
+        // now at London
+        System.out.println(cruiseShip.boardPassenger(jack));    // true
+        System.out.println(cruiseShip.boardPassenger(gill));    // false - still at London
+
+        // Brighton
+        cruiseShip.travelToNextStop();                          // nobody gets off       
+
+        // Parris
+        cruiseShip.travelToNextStop();                          // James gets off
+        System.out.println(cruiseShip.boardPassenger(gill));    // true
+
+        // New York
+        cruiseShip.travelToNextStop();                          //Jack, Gill gets off
+
+        // You cannot go further
+        cruiseShip.travelToNextStop();    
+    }
+
+    private static void conceptCheck() {
         for (int i = 20; i >= 7; i--)
             System.out.println(i);
 
