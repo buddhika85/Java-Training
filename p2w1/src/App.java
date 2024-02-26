@@ -34,8 +34,45 @@ public class App {
 
 
         // Test lab
-        testLab();
+        //testLab();
 
+        testLoopRemoveScenario();
+
+    }
+
+    private static void testLoopRemoveScenario() {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(2);
+        numbers.add(3);
+        int wantToRemove = 2;
+
+        // java.util.ConcurrentModificationException
+        // For Each does not support modifications while iterating
+        // for (Integer num : numbers) {
+        //     if (num == wantToRemove)
+        //         numbers.remove(num);
+        // }
+
+        // logically wrong
+        // for (int i = 0; i < numbers.size(); i++) {
+        //     int num = numbers.get(i);
+        //     if (num == wantToRemove)
+        //         numbers.remove(i);
+        // }
+
+        // reverse - works
+        for (int i = numbers.size() - 1; i >= 0; i--) {
+            int num = numbers.get(i);
+            if (num == wantToRemove)
+                numbers.remove(i);
+        }
+
+        System.out.println("After removal");
+        for (Integer num : numbers) {
+            System.out.println(num);
+        }
     }
 
     private static void testLab() {      
