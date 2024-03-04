@@ -13,13 +13,21 @@ public class Assessment
     private static final int MAX_P_MARK = 64;
     private static final int MAX_F_MARK = 49;
 
-
-
-    public Assessment(String name, int mark, int totalPossibleMarks, int fudgeMark) {
+    public Assessment(String name, int mark, int totalPossibleMarks, int fudgeMark) 
+    {
         this.name = name;
         this.mark = mark;
         this.totalPossibleMarks = totalPossibleMarks;
         this.fudgeMark = fudgeMark;
+    }
+
+    public Assessment(String name, Grade grade) 
+    {
+        this.name = name;
+        this.mark = getMaxMarForGrade(grade);
+
+        this.totalPossibleMarks = 100;
+        this.fudgeMark = 0;
     }
 
     public Grade computeGrade()
@@ -42,6 +50,7 @@ public class Assessment
         return mark + fudgeMark;
     }
 
+    // penalty parameter must be positive. 
     // e.g. calling penalise(10) means a 10-mark penalty is applied, which means fudgeMark is set to -10.
     public void penalise(int penalty)
     {
@@ -59,16 +68,7 @@ public class Assessment
     public void penalise(Grade newGrade)
     {
         int possibleMaxMark = 0;
-        if (newGrade == Grade.HD)        
-            possibleMaxMark = MAX_HD_MARK; 
-        else if (newGrade == Grade.D)
-            possibleMaxMark = MAX_D_MARK;        
-        else if (newGrade == Grade.C)        
-            possibleMaxMark = MAX_C_MARK;
-        else if (newGrade == Grade.P)
-            possibleMaxMark = MAX_P_MARK;
-        else 
-            possibleMaxMark = MAX_F_MARK;
+        possibleMaxMark = getMaxMarForGrade(newGrade);
         
 
         // if mark 77 and newGrade = C
@@ -79,10 +79,65 @@ public class Assessment
         fudgeMark = possibleMaxMark - mark;
     }
 
+    private int getMaxMarForGrade(Grade newGrade) 
+    {       
+        if (newGrade == Grade.HD)        
+            return MAX_HD_MARK; 
+        if (newGrade == Grade.D)
+            return MAX_D_MARK;        
+        if (newGrade == Grade.C)        
+            return MAX_C_MARK;
+        if (newGrade == Grade.P)
+            return MAX_P_MARK;
+         
+        return MAX_F_MARK;
+    }
+
     @Override
     public String toString() {
         return "Assessment [name=" + name + ", mark=" + mark + ", totalPossibleMarks=" + totalPossibleMarks
                 + ", fudgeMark=" + fudgeMark + ", mark after fudging=" + getMarkAfterFudging() + ", final grade =" + computeGrade() + "]";
+    }
+
+    // accessors and mutators
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public int getTotalPossibleMarks() {
+        return totalPossibleMarks;
+    }
+
+    public int getFudgeMark() {
+        return fudgeMark;
+    }
+
+    public static int getMaxHdMark() {
+        return MAX_HD_MARK;
+    }
+
+    public static int getMaxDMark() {
+        return MAX_D_MARK;
+    }
+
+    public static int getMaxCMark() {
+        return MAX_C_MARK;
+    }
+
+    public static int getMaxPMark() {
+        return MAX_P_MARK;
+    }
+
+    public static int getMaxFMark() {
+        return MAX_F_MARK;
     }
 
     
