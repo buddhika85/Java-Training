@@ -6,7 +6,20 @@ public class App {
         //enumTest();
         //testStudentAssesment();
         //testStudentMenu();
-        testIPhoneMenu();
+        //testIPhoneMenu();
+        testPizza();
+    }
+
+    private static void testPizza() 
+    {
+        Pizza pizza = new Pizza(1000, new Topping[] {Topping.CHICKEN});     // 1000
+        System.out.println(pizza.calculatePrice());
+        pizza.addTopping(Topping.CHEESE);       // 1050
+        pizza.addTopping(Topping.BACON);        // 1110
+        System.out.println(pizza.calculatePrice());
+        //pizza.applyDiscount(110);
+        pizza.applyDiscountRate(0.1);
+        System.out.println(pizza.calculatePrice());
     }
 
     private static void testIPhoneMenu() 
