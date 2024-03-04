@@ -19,7 +19,8 @@ public class GradingSystem
             System.out.println("  1. Add Assessment");
             System.out.println("  2. View Assements");
             System.out.println("  3. Modify Grade");
-            System.out.println("  4. Exit");
+            System.out.println("  4. Set Subject");
+            System.out.println("  5. Exit");
             int choice = In.nextInt();
             if (choice == 1) 
             {
@@ -35,15 +36,26 @@ public class GradingSystem
             } 
             else if (choice == 4) 
             {
-                break;
+                setSubject();
             } 
+            else if (choice == 5)
+            {
+                break;
+            }
             else 
             {
-                System.out.println("Pick an option 1, 2, or 3");
+                System.out.println("Pick an option 1, 2, 3 or 4");
             }
         }
 
         System.out.println("Exiting...");
+    }
+
+
+    private void setSubject() 
+    {
+        System.out.println("Select Subject\n[1] For Programming 1\n[2] For Programming 2");
+        student.setAssessmentsToUse(In.nextInt());
     }
 
 
