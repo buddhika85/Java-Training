@@ -1,9 +1,17 @@
+import iPhone.IPhoneMenu;
+
 public class App {
     public static void main(String[] args) throws Exception 
     {
         //enumTest();
         //testStudentAssesment();
-        testStudentMenu();
+        //testStudentMenu();
+        testIPhoneMenu();
+    }
+
+    private static void testIPhoneMenu() 
+    {
+        new IPhoneMenu().runMainMenu();
     }
 
     private static void testStudentMenu() 

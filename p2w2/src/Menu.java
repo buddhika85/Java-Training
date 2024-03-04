@@ -1,3 +1,5 @@
+import iPhone.In;
+
 public class Menu {
     void runMainMenu() {
         System.out.println("--- Main menu ---");
