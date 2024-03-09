@@ -2,22 +2,29 @@ class Marine extends Soldier
 {
     boolean stimpackActive;
 
-    Marine() {
+    Marine() 
+    {
         super(Weapon.MACHINE_GUN, 40, 4);
         this.stimpackActive = false;
     }
 
-    void activateStimpack() {
+    void activateStimpack() 
+    {
         this.stimpackActive = true;
     }
 
+    // modify the damage it can inflict on AIR units by overriding the getAirDamage() method:
     @Override
-    int getAirDamage() {
+    int getAirDamage() 
+    {
         int originalDamage = super.getAirDamage();
-        if (this.stimpackActive) {
+        if (this.stimpackActive) 
+        {
             // If stimpack is active, increase damage by 50%.
             return originalDamage + originalDamage / 2;
-        } else {
+        } 
+        else 
+        {
             return originalDamage;
         }
     }
