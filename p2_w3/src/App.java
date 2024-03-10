@@ -8,17 +8,22 @@ public class App {
     private static void testSquad() 
     {
         Squad squad = new Squad();
-        squad.addSoldier(new Marine());
-        squad.addSoldier(new Firebat());
-        squad.addSoldier(new Marine());
-        squad.addSoldier(new Marine());
-        squad.addSoldier(new Firebat());
-        squad.addSoldier(new Firebat());
-        squad.addSoldier(new Firebat());
-        squad.addSoldier(new Marine());
+        squad.add(new Marine());
+        squad.add(new Firebat());
+        squad.add(new Marine());
+        squad.add(new Marine());
+        squad.add(new Firebat());
+        squad.add(new Firebat());
+        squad.add(new Firebat());
+        squad.add(new Marine());
 
-        squad.addSoldier(new Ghost());
-        squad.addSoldier(new Ghost());
+        squad.add(new Ghost());
+        squad.add(new Ghost());
+
+        squad.add(new Wraith());
+        squad.add(new Wraith());
+        squad.add(new Wraith());
+        squad.add(new Wraith());
 
         squad.printSquadComposition();
     }

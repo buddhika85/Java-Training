@@ -1,4 +1,4 @@
-public class Soldier 
+public class Soldier extends TerranUnit
 {
     private final int MAX_HEALTH;
     private final Weapon WEAPON;
@@ -7,7 +7,11 @@ public class Soldier
     // Measures how fast the soldier can move
     private int speed;
 
-    Soldier(Weapon weapon, int maxHealth, int speed) {
+    Soldier(Weapon weapon, int maxHealth, int speed) 
+    {
+        // assumption: Solider is a ground unit
+        super(UnitType.GROUND_BASED);
+        
         this.MAX_HEALTH = maxHealth;
         this.WEAPON = weapon;
         this.currentHealth = maxHealth;

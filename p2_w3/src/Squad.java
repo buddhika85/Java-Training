@@ -2,24 +2,25 @@ import java.util.ArrayList;
 
 public class Squad 
 {
-    private ArrayList<Soldier> members;
+    private ArrayList<TerranUnit> members;
 
     Squad() 
     {
         this.members = new ArrayList<>();
     }
 
-    void addSoldier(Soldier soldier) 
+    void add(TerranUnit terranUnit) 
     {
-        this.members.add(soldier);
+        this.members.add(terranUnit);
     }
 
     int totalGroundAttackPower() 
     {
         int total = 0;
-        for (Soldier s : this.members) 
+        for (TerranUnit s : this.members) 
         {
-            total += s.getGroundDamage();
+            if (s instanceof Soldier) 
+                total += ((Soldier)s).getGroundDamage();
         }
 
         return total;
@@ -27,7 +28,7 @@ public class Squad
 
     void activateStimpackForMarines() 
     {
-        for (Soldier s : this.members) 
+        for (TerranUnit s : this.members) 
         {
             // Here is where we check for `Marine` type
             if (s instanceof Marine) 
@@ -49,8 +50,8 @@ public class Squad
 
     void printSquadComposition()
     {
-        int fireBatCount = 0, marineCount = 0, ghostCount = 0;
-        for (Soldier s : this.members) 
+        int fireBatCount = 0, marineCount = 0, ghostCount = 0, wraithCount = 0;
+        for (TerranUnit s : this.members) 
         {
             if (s instanceof Marine) 
                 ++marineCount;
@@ -58,15 +59,18 @@ public class Squad
                 ++fireBatCount;
             if (s instanceof Ghost)
                 ++ghostCount;
+            if (s instanceof Wraith)
+                ++wraithCount;
         }
         System.out.println("FireBat count: " + fireBatCount + 
             ", marine count: " + marineCount +
-            ", ghost count: " + ghostCount);
+            ", ghost count: " + ghostCount +
+            ", wraith count: " + wraithCount);
     }
 
     void cloakAllGhosts()
     {
-        for (Soldier s : this.members) 
+        for (TerranUnit s : this.members) 
         {
             if (s instanceof Ghost)
             {
