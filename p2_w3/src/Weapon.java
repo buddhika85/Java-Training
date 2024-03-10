@@ -1,7 +1,8 @@
 enum Weapon 
 {
     MACHINE_GUN(6, 6, 4),
-    FLAME_THROWER(8, 0, 2);
+    FLAME_THROWER(8, 0, 2),
+    C_10_RIFLE(10, 10, 7);
 
     // Amount of damage that can be inflicted on ground-base enemies
     private int groundDamage;
