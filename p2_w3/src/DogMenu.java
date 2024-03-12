@@ -53,6 +53,8 @@ public class DogMenu
     private void add() 
     {
         System.out.println("--- Add ---");
+        Dog dog = readDogInputs();
+        puppyTracker.addPuppy(dog);
     }
 
     private void remove() 
@@ -74,4 +76,37 @@ public class DogMenu
     {
         System.out.println("--- Print puppy details ---");
     }
+
+
+    private Dog readDogInputs()
+    {
+        String name = readString("\tname?");
+        double age = readDouble("\tage?");
+        double weight = readDouble("\tweight?");
+        double length = readDouble("\tlength?");
+        int typeId = readInt("\tType? [1] Husky [2] Poodle");
+        if (typeId == 2)
+        {
+            return new Poodle(age, weight, length, name);
+        }
+        return new Husky(age, weight, length, name);
+    }
+
+    private int readInt(String question) 
+    {
+        System.out.print(question);
+        return In.nextInt();
+    }
+
+    private double readDouble(String question) 
+    {
+        System.out.print(question);
+        return In.nextDouble();
+    }
+
+    private String readString(String question) 
+    {
+        System.out.print(question);
+        return In.nextLine();
+    }    
 }
