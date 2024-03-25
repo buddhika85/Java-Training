@@ -18,7 +18,9 @@ public class Student
 
     // modify the comparator above to first sort by averageMark in descending order (largest-to-smallest). Then sort like usual with lastName then firstName.
     static final Comparator<Student> comparatorAvgReverseAndNames = 
-        Comparator.comparing(Student::getAverageMark).reversed().thenComparing(Student::getLastName).thenComparing(Student::getFirstName);
+        Comparator.comparing(Student::getAverageMark).reversed()
+        .thenComparing(Student::getLastName)
+        .thenComparing(Student::getFirstName);
 
     Student(String firstName, String lastName, double averageMark) 
     {
