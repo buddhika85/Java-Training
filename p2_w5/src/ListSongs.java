@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.util.List;
 
 interface ListSongs {
     // List all songs
-    ArrayList<Song> listSongs();
+    List<Song> listSongs();
 
     // List songs by artist
-    ArrayList<Song> listSongs(String artist);
+    List<Song> listSongs(String artist);
 }

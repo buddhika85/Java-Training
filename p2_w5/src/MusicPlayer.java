@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
-class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
+class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs, ListenPlayList 
+{
     AudioTrack[] library;
     PlayMode currentPlayMode;
 
@@ -64,15 +65,21 @@ class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
                 }
             }
         } else {
-            // Randomised playback. There are a couple of ways to do this.
-            // We'll randomly pick a song out of the ArrayList, then remove it.
-            while (!songs.isEmpty()) {
-                Random rand = new Random();
-                int choice = rand.nextInt(songs.size());
-                songs.get(choice).play();
-                songs.remove(choice);
+            Collections.shuffle(songs);
+            for (Song s : songs) 
+            {
+                s.play();
             }
         }
     }
 
+    @Override
+    public void listenToPlayList(PlayList playList) 
+    {
+        System.out.println("Playing - " + playList);
+        for (int index : playList.list) 
+        {
+            library[index].play();
+        }
+    }
 }

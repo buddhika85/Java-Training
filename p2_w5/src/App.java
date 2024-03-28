@@ -8,7 +8,29 @@ public class App {
     {
         //testBinarySearch();
         //testProperty();
-        testAgentInvetory();
+        //testAgentInvetory();
+
+        testMusicPlayer();
+    }
+
+    private static void testMusicPlayer() 
+    {
+        AudioTrack[] library = { new Song("Gangnam Style", 219, "Psy", MusicGenre.POP),
+                new Song("Enter Sandman", 331, "Metallica", MusicGenre.METAL),
+                new Podcast("The Joe Rogan Experience: Robert Kennedy, Jr", 10800, "Joe Rogan", PodcastGenre.COMEDY,
+                        1999),
+                new Song("Aces High", 271, "Iron Maiden", MusicGenre.METAL),
+                new Podcast("The Joe Rogan Experience: Mike Tyson", 9000, "Joe Rogan", PodcastGenre.COMEDY,
+                        1532),
+                new Song("Moonshield", 301, "In Flames", MusicGenre.METAL),
+                new Song("Mesmeric Horror", 314, "Inferi ", MusicGenre.METAL),
+                new Song("Eye of the Tiger", 245, "Survivor", MusicGenre.ROCK),
+                new Song("Beat It", 258, "Michael Jackson", MusicGenre.POP),
+                new Song("Ode To Joy", 660, "Ludwig van Beethoven", MusicGenre.CLASSICAL),
+                new Podcast("Lex Fridman Podcast: Mark Zuckerberg", 3840, "Lex Fridman", PodcastGenre.TECHNOLOGY,
+                        398) };
+        PlayList playList = PlayList.generateRandomPlayList(library.length, 3);
+        new MusicPlayer(library, PlayMode.LINEAR).listenToPlayList(playList);
     }
 
     private static void testAgentInvetory() 

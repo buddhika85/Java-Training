@@ -1,5 +1,6 @@
-import java.util.ArrayList;
+import java.util.List;
 
-interface ListPodcasts {
-    ArrayList<Podcast> listPodcasts();
+interface ListPodcasts 
+{
+    List<Podcast> listPodcasts();
 }
