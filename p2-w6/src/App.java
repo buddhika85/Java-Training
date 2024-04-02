@@ -44,7 +44,7 @@ public class App
             } 
             else if (choice == 5) 
             {
-                sortedDisplayMenu();
+                sortDisplayMenu();
             } 
             else if (choice == 6) 
             {
@@ -64,7 +64,7 @@ public class App
         musicPlayer.listMostPlayedTracks();
     }
 
-    private void sortedDisplayMenu() 
+    private void sortDisplayMenu() 
     {
         System.out.println("SORTED PLAYLIST-------------------");
         if (this.musicPlayer.getUserPlayLists().isEmpty()) {
