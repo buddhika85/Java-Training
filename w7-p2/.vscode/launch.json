@@ -2,6 +2,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MovePoint",
+            "request": "launch",
+            "mainClass": "MovePoint",
+            "projectName": "w7-p2_e299c21d",
+            "vmArgs": "--module-path \"d:\\18_04-start\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "PersonEditor",
             "request": "launch",
             "mainClass": "PersonEditor",
