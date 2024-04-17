@@ -2,6 +2,30 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersonEditor",
+            "request": "launch",
+            "mainClass": "PersonEditor",
+            "projectName": "w7-p2_e299c21d",
+            "vmArgs": "--module-path \"d:\\18_04-start\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ButtonClick",
+            "request": "launch",
+            "mainClass": "ButtonClick",
+            "projectName": "w7-p2_e299c21d",
+            "vmArgs": "--module-path \"d:\\18_04-start\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Second",
+            "request": "launch",
+            "mainClass": "Second",
+            "projectName": "w7-p2_e299c21d",
+            "vmArgs": "--module-path \"d:\\18_04-start\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "First",
             "request": "launch",
             "mainClass": "First",
