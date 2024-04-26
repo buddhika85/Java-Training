@@ -1,4 +1,4 @@
-public class LibrarySystem 
+public class LibrarySystem implements IMenu
 {
     // group class objects
     private Books books = new Books();
@@ -7,10 +7,19 @@ public class LibrarySystem
     public LibrarySystem() 
     {
         populateTestData();
+
     }
 
     private void populateTestData() 
     {
-        books.add(new Book(0, null, null));
+        books.add("Guliver Travels", "Jonathan Swift");
+        books.add("Jungle Book", "Jonathan Swift");
+        members.add("James Gun", "james@gmail.com");
+        members.add("John Smith", "john@gmail.com");
+
+        System.out.println(books);
+        System.out.println(members);
     }
+
+
 }

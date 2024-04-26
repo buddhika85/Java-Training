@@ -1,7 +1,7 @@
 public class Member extends Record 
 {
     private String email;
-    private Books borrowedBooks;
+    private Books borrowedBooks = new Books();
 
     protected Member(int id, String name, String email) 
     {

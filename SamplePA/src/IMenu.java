@@ -1,27 +1,27 @@
 public interface IMenu 
 {
     // add
-    void addMember();
-    void addBook();
+    // void addMember();
+    // void addBook();
 
-    // retireve an object
-    void searchForMember();
-    void searchForBook();
+    // // retireve an object
+    // void searchForMember();
+    // void searchForBook();
 
-    // remove
-    void removeMember();
-    void removeBook();
+    // // remove
+    // void removeMember();
+    // void removeBook();
 
-    // edit
-    void borrowBook();
-    void returnBook();
+    // // edit
+    // void borrowBook();
+    // void returnBook();
 
-    // generate a sub list
-    void displayBooksByGenre();         
-    void displayAvailableBooks();    
+    // // generate a sub list
+    // void displayBooksByGenre();         
+    // void displayAvailableBooks();    
     
-    // sorting
-    void displayBooksByPopularity();
-    void displayMemebersInAsc();
-    void displayMembersInDsc();
+    // // sorting
+    // void displayBooksByPopularity();
+    // void displayMemebersInAsc();
+    // void displayMembersInDsc();
 }

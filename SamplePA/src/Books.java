@@ -6,6 +6,11 @@ public class Books extends Records
         return (Book)super.find(id);
     }
 
+    public void add(String name, String author)
+    {
+        add(new Book(++id, name, author));
+    }
+
     @Override
     public Book find(String name)
     {
