@@ -2,6 +2,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersonForm",
+            "request": "launch",
+            "mainClass": "PersonForm",
+            "projectName": "p2-w9_e234d89b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "MultiWindow",
             "request": "launch",
             "mainClass": "MultiWindow",
