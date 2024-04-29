@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 public abstract class Records
 {
     protected LinkedList<Record> records = new LinkedList<Record>();
     protected int id = 0;
 
+    public final static Comparator<Record> NAME_ASC = Comparator.comparing(Record::getName);
+    public final static Comparator<Record> NAME_DESC = Comparator.comparing(Record::getName).reversed();
 
     protected Record find(int id)
     {   
@@ -45,7 +50,7 @@ public abstract class Records
     public void show()
     {
         System.out.println(toString());
-    }
+    }    
 
     @Override
     public String toString()

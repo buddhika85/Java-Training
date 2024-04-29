@@ -284,11 +284,22 @@ public class LibrarySystem implements IMenu
     public void displayMemebersInAsc() 
     {
         displayHeading("Display members in ASC");
+        List<Member> membersByNameAsc = members.sortByNameAsc();
+        for (Member member : membersByNameAsc) {
+            System.out.println(member.getId() + " - " + member.getName());
+        }
+        System.out.println("\n");
     }
 
     @Override
-    public void displayMembersInDsc() {
+    public void displayMembersInDsc() 
+    {
         displayHeading("Display members in DSC");
+        List<Member> membersByNameAsc = members.sortByNameDesc();
+        for (Member member : membersByNameAsc) {
+            System.out.println(member.getId() + " - " + member.getName());
+        }
+        System.out.println("\n");
     }
 
     
