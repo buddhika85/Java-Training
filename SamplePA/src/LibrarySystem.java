@@ -158,12 +158,32 @@ public class LibrarySystem implements IMenu
     public void removeMember() 
     {
         displayHeading("Remove Member");
+        String name = readString("Name?");
+        Member member = members.find(name);
+        if (member == null)
+        {
+            System.out.println("hmm -- member with such name does not exist in our records");
+            return;
+        }
+
+        members.remove(member);
+        displaySuccessMessage("Member removed - " + name);
     }
 
     @Override
     public void removeBook() 
     {
         displayHeading("Remove Book");
+        String name = readString("Name?");
+        Book book = books.find(name);
+        if (book == null)
+        {
+            System.out.println("hmm -- book with such name does not exist in our records");
+            return;
+        }
+
+        books.remove(book);
+        displaySuccessMessage("Book removed - " + name);
     }
 
     @Override

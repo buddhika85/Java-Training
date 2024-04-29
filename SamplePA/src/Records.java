@@ -32,6 +32,11 @@ public abstract class Records
         records.add(record);
     }
 
+    protected void remove(Record record)
+    {
+        records.remove(record);
+    }
+
     public int size()
     {
         return records.size();
