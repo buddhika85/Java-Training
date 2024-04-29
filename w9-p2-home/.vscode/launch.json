@@ -1,0 +1,52 @@
+{
+    "configurations": [        
+        {
+            "type": "java",
+            "name": "MVCExample",
+            "request": "launch",
+            "mainClass": "MVCExample",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonTableApp",
+            "request": "launch",
+            "mainClass": "PersonTableApp",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonListAddRemove",
+            "request": "launch",
+            "mainClass": "PersonListAddRemove",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonListApp",
+            "request": "launch",
+            "mainClass": "PersonListApp",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonForm",
+            "request": "launch",
+            "mainClass": "PersonForm",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "MultiWindow",
+            "request": "launch",
+            "mainClass": "MultiWindow",
+            "projectName": "w9_e60bac4b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
