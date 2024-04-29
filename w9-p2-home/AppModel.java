@@ -67,7 +67,8 @@ class Todo
     }
 }
 
-enum Status {
+enum Status 
+{
     IN_PROGRESS, DONE, WONT_COMPLETE
 }
 
