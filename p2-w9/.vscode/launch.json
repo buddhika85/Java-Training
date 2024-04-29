@@ -2,6 +2,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersonListAddRemove",
+            "request": "launch",
+            "mainClass": "PersonListAddRemove",
+            "projectName": "p2-w9_e234d89b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonListApp",
+            "request": "launch",
+            "mainClass": "PersonListApp",
+            "projectName": "p2-w9_e234d89b",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "PersonForm",
             "request": "launch",
             "mainClass": "PersonForm",
