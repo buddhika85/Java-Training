@@ -27,6 +27,21 @@ public class AppModel
     public void removeTodo(int index) {
         this.todos.remove(index);
     }
+
+	public void removeAll() 
+    {
+        todos.clear();
+	}
+
+    public void removeDoneTodos() {
+        if (!todos.isEmpty()) {
+            for (int i = todos.size() - 1; i >= 0; i--) {
+               // If the Todo object at index i is DONE, remove it.
+               if (todos.get(i).getStatus() == Status.DONE)
+                    todos.remove(i);
+            }
+        }
+    }
 }
 
 class Todo 
@@ -34,11 +49,13 @@ class Todo
     // To wrap up enum values within a Property we can use `SimpleObjectProperty`,
     // provided by JavaFX.
     private final SimpleObjectProperty<Status> status;
+    private final SimpleObjectProperty<Priority> priority;
     private final SimpleStringProperty description;
 
-    Todo(String description, Status status) {
+    Todo(String description, Status status, Priority priority) {
         this.description = new SimpleStringProperty(description);
         this.status = new SimpleObjectProperty<>(status);
+        this.priority = new SimpleObjectProperty<>(priority);
     }
 
     // getters and setters
@@ -52,6 +69,18 @@ class Todo
 
     public SimpleObjectProperty<Status> statusProperty() {
         return status;
+    }
+
+    public Priority getPriority() {
+        return priority.get();
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority.set(priority);
+    }
+
+    public SimpleObjectProperty<Priority> priorityProperty() {
+        return priority;
     }
 
     public String getDescription() {
@@ -69,7 +98,17 @@ class Todo
 
 enum Status 
 {
-    IN_PROGRESS, DONE, WONT_COMPLETE
+    IN_PROGRESS("In Progress"), DONE("Done"), WONT_COMPLETE ("Won't Complete");
+    private final String DISPLAY_STR;
+    private Status(String displayStr) 
+    {
+        DISPLAY_STR = displayStr;
+    }
+    @Override
+    public String toString()
+    {
+        return DISPLAY_STR;
+    }
 }
 
 enum Priority {

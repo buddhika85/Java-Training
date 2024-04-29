@@ -21,4 +21,14 @@ public class AppController
     {
         this.model.removeTodo(index);
     }
+
+    public void removeAll()
+    {
+        model.removeAll();
+    }
+
+    public void removeAllDone() 
+    {
+        model.removeDoneTodos();
+    }
 }

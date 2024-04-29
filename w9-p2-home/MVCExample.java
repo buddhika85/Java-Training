@@ -13,7 +13,7 @@ public class MVCExample extends Application
         AppController controller = new AppController(model);
         AppView view = new AppView(controller, model, primaryStage);
 
-        Scene scene = new Scene(view.asParent(), 600, 300);
+        Scene scene = new Scene(view.asParent(), 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -1,3 +1,6 @@
+import javax.swing.event.ChangeListener;
+
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +24,8 @@ public class AppView
     private Button addTodoBtn;
     private Button updateTodoBtn;
     private Button removeTodoBtn;
+    private Button removeAllTodoBtn;
+    private Button removeAllDoneTodoBtn;
 
     private AppController controller;
     private AppModel model;
@@ -47,6 +52,9 @@ public class AppView
     private void observeModelAndUpdateControls() 
     {
         // Not needed here
+        model.todosProperty().addListener((ListChangeListener<? super Todo>) change -> {
+            //if (change.was)
+        });
     }
 
     private void updateControllerFromListeners() 
@@ -68,8 +76,12 @@ public class AppView
         TableColumn<Todo, Status> statusCol = new TableColumn<>("Status");
         statusCol.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 
+        // priority column
+        TableColumn<Todo, Priority> priorityCol = new TableColumn<>("Priority");
+        priorityCol.setCellValueFactory(cellData -> cellData.getValue().priorityProperty());
+
         // add columns to table
-        this.todoView.getColumns().addAll(descriptionCol, statusCol);
+        this.todoView.getColumns().addAll(descriptionCol, statusCol, priorityCol);
         this.todoView.setItems(model.todosProperty());
 
         // Setup the buttons
@@ -93,7 +105,18 @@ public class AppView
             }
         });
 
-        HBox buttonRow = new HBox(5, addTodoBtn, updateTodoBtn, removeTodoBtn);
+        removeAllTodoBtn = new Button("Remove All To-dos");
+        removeAllTodoBtn.setOnAction(event -> {
+            controller.removeAll();
+        });
+
+        removeAllDoneTodoBtn = new Button("Remove All done To-dos");
+        removeAllDoneTodoBtn.setOnAction(event -> {
+            controller.removeAllDone();
+        });
+
+        HBox buttonRow = new HBox(5, addTodoBtn, updateTodoBtn, 
+            removeTodoBtn, removeAllTodoBtn, removeAllDoneTodoBtn);
 
         view.getChildren().addAll(this.todoView, buttonRow);
     }
@@ -130,6 +153,18 @@ public class AppView
         HBox radioBtnRow = new HBox(5, inProgressBtn, doneBtn, wontCompleteBtn);
         radioBtnRow.setAlignment(Pos.CENTER);
 
+
+        // Toggle group to set priority
+        ToggleGroup toggleGroupStatus = new ToggleGroup();
+        RadioButton lowRdBtn = new RadioButton("Low");
+        lowRdBtn.setToggleGroup(toggleGroupStatus);
+        RadioButton mediumRdBtn = new RadioButton("Medium");
+        mediumRdBtn.setToggleGroup(toggleGroupStatus);
+        RadioButton highRdBtn = new RadioButton("High");
+        highRdBtn.setToggleGroup(toggleGroupStatus);
+        HBox priorityRadioBtnRow = new HBox(5, lowRdBtn, mediumRdBtn, highRdBtn);
+        priorityRadioBtnRow.setAlignment(Pos.CENTER);
+
         Button submitBtn = new Button("Submit");
         submitBtn.setOnAction(event -> {
             String text = descriptionField.getText().trim();
@@ -142,8 +177,23 @@ public class AppView
                 status = Status.DONE;
             }
 
+            Priority priority;
+            if (lowRdBtn.isSelected())
+            {
+                priority = Priority.LOW;
+            }
+            else if (mediumRdBtn.isSelected())
+            {
+                priority = Priority.MEDIUM;
+            }
+            else
+            {
+                priority = Priority.HIGH;
+            }
+
+
             if (!text.isEmpty()) {
-                Todo t = new Todo(descriptionField.getText(), status);
+                Todo t = new Todo(descriptionField.getText(), status, priority);
                 this.controller.addTodo(t);
                 stage.close();
             }
@@ -154,10 +204,10 @@ public class AppView
         HBox buttonRow = new HBox(5, submitBtn, cancelBtn);
         buttonRow.setAlignment(Pos.CENTER);
 
-        VBox root = new VBox(5, descriptionRow, radioBtnRow, buttonRow);
+        VBox root = new VBox(5, descriptionRow, radioBtnRow, priorityRadioBtnRow, buttonRow);
         root.setAlignment(Pos.CENTER);
 
-        Scene helloScene = new Scene(root, 300, 100);
+        Scene helloScene = new Scene(root, 300, 150);
 
         stage.setScene(helloScene);
         stage.show();
@@ -193,6 +243,18 @@ public class AppView
         HBox radioBtnRow = new HBox(5, inProgressBtn, doneBtn, wontCompleteBtn);
         radioBtnRow.setAlignment(Pos.CENTER);
 
+
+        // Toggle group to set priority
+        ToggleGroup toggleGroupStatus = new ToggleGroup();
+        RadioButton lowRdBtn = new RadioButton("Low");
+        lowRdBtn.setToggleGroup(toggleGroupStatus);
+        RadioButton mediumRdBtn = new RadioButton("Medium");
+        mediumRdBtn.setToggleGroup(toggleGroupStatus);
+        RadioButton highRdBtn = new RadioButton("High");
+        highRdBtn.setToggleGroup(toggleGroupStatus);
+        HBox priorityRadioBtnRow = new HBox(5, lowRdBtn, mediumRdBtn, highRdBtn);
+        priorityRadioBtnRow.setAlignment(Pos.CENTER);
+
         Button submitBtn = new Button("Submit");
         submitBtn.setOnAction(event -> {
             String text = descriptionField.getText().trim();
@@ -205,10 +267,20 @@ public class AppView
             } else {
                 newStatus = Status.DONE;
             }
+
+            Priority newPriority;
+            if (lowRdBtn.isSelected()) {
+                newPriority = Priority.LOW;
+            } else if (mediumRdBtn.isSelected()) {
+                newPriority = Priority.MEDIUM;
+            } else {
+                newPriority = Priority.HIGH;
+            }
+
             boolean changedStatus = oldStatus != newStatus;
             boolean newTextIsNonEmptyAndDiffers = !text.isEmpty() && !text.equals(oldText);
             if (newTextIsNonEmptyAndDiffers || changedStatus) {
-                Todo t = new Todo(descriptionField.getText(), newStatus);
+                Todo t = new Todo(descriptionField.getText(), newStatus, newPriority);
                 this.controller.updateTodo(t, index);
                 stage.close();
             }
@@ -219,10 +291,10 @@ public class AppView
         HBox buttonRow = new HBox(5, submitBtn, cancelBtn);
         buttonRow.setAlignment(Pos.CENTER);
 
-        VBox root = new VBox(5, descriptionRow, radioBtnRow, buttonRow);
+        VBox root = new VBox(5, descriptionRow, radioBtnRow, priorityRadioBtnRow, buttonRow);
         root.setAlignment(Pos.CENTER);
 
-        Scene helloScene = new Scene(root, 300, 100);
+        Scene helloScene = new Scene(root, 300, 150);
 
         stage.setScene(helloScene);
         stage.show();
