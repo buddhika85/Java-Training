@@ -19,13 +19,16 @@ public class Member extends Record
         this.email = email;
     }
 
-    public void borrowBook(Book book) throws Exception
+    public void borrowBook(Book book)
     {
-        if (!book.isAvailable())
-            throw new Exception(book + " is already borrowed");
-
         borrowedBooks.add(book);
         book.borrow();
+    }
+
+    public void returnBook(Book book)
+    {
+        borrowedBooks.remove(book);
+        book.returnBook();
     }
 
     @Override

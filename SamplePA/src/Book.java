@@ -26,21 +26,24 @@ public class Book extends Record
         return status == BookStatus.AVAILABLE;
     }
 
-    public void borrow() throws Exception 
+    public void borrow()
     {
-        if (!isAvailable())
-            throw new Exception(this + " is already borrowed");
-
         ++borrowalCount;
         status = BookStatus.BORROWED;
     }
 
-    public void returnBook() throws Exception
+    public void returnBook() 
     {
-        if (isAvailable())
-            throw new Exception(this + " is already returned");
-
         status = BookStatus.AVAILABLE;
+    }
+
+    public BookStatus getStatus() 
+    {
+        return status;
+    }
+    
+    public int getBorrowalCount() {
+        return borrowalCount;
     }
 
     @Override

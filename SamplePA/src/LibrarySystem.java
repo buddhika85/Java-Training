@@ -190,26 +190,94 @@ public class LibrarySystem implements IMenu
     public void borrowBook() 
     {
         displayHeading("Borrow Book");
+        String memberName = readString("Member Name?");
+        Member member = members.find(memberName);
+        if (member == null)
+        {
+            System.out.println("hmm -- member with such name does not exist in our records");
+            return;
+        }
+        
+        System.out.println("Member found.\n\t" + member + "\n");
+        String bookName = readString("Book Name (to borrow)?");
+        Book book = books.find(bookName);
+        if (book == null)
+        {
+            System.out.println("hmm -- book with such name does not exist in our records");
+            return;
+        }
+        if (!book.isAvailable())   
+        {
+            System.out.println("hmm -- book " + bookName + " is borrowed, please retry later");
+            return;
+        } 
+
+        // borrow
+        member.borrowBook(book);
+        displaySuccessMessage(memberName + " borrowed book : " + bookName);
     }
 
     @Override
     public void returnBook() 
     {
         displayHeading("Return Book");
-    }
+        String memberName = readString("Member Name?");
+        Member member = members.find(memberName);
+        if (member == null)
+        {
+            System.out.println("hmm -- member with such name does not exist in our records");
+            return;
+        }
+        
+        System.out.println("Member found.\n\t" + member + "\n");
+        String bookName = readString("Book Name (to return)?");
+        Book book = books.find(bookName);
+        if (book == null)
+        {
+            System.out.println("hmm -- book with such name does not exist in our records");
+            return;
+        }
+        if (book.isAvailable())   
+        {
+            System.out.println("hmm -- book " + bookName + " is not borrowed by this member");
+            return;
+        } 
 
-  
+        // borrow
+        member.returnBook(book);
+        displaySuccessMessage(memberName + " returned book : " + bookName);
+    }
 
     @Override
     public void displayAvailableBooks() 
     {
         displayHeading("Display all available Book");
+        List<Book> availableBooks = books.findByStatus(BookStatus.AVAILABLE);
+        if (availableBooks.isEmpty())
+            System.out.println("\nCurrently all books are Borrow");
+        else
+        {
+            System.out.println("Available books");
+            for (Book book : availableBooks) {
+                System.out.println(book);
+            }
+        }
+        System.out.println("\n");
     }
 
     @Override
     public void displayBooksByPopularity() 
     {
         displayHeading("Display Book by popularity");
+        List<Book> bookByPopularity = books.popularBookList();
+        for (int index = 0; index < bookByPopularity.size(); index++) 
+        {
+            Book book = bookByPopularity.get(index);
+            System.out.println("Rank " + (index + 1) + " ID " + book.getId() + " " + book.getName() 
+                + " by " + book.getAuthor() + 
+                " borrowed " + book.getBorrowalCount() + " times");
+        }
+        System.out.println("\n");
     }
 
     @Override
@@ -244,8 +312,31 @@ public class LibrarySystem implements IMenu
         books.add("Kipling's Poems", "Rudyard Kipling");
         books.add("Brer Rabbit Book", "Enid Blyton");
         books.add("The white mans burden", "Rudyard Kipling");
+
         members.add("James Gun", "james@gmail.com");
         members.add("John Smith", "john@gmail.com");
+        members.add("Lorgan", "wolverine@gmail.com");
+        members.add("Scott Summers", "scott@gmail.com");
+        members.add("Jean Grey", "jean@gmail.com");
+        members.add("Charls Xvier", "proffX@gmail.com");
+        members.add("Magnus", "magnito@gmail.com");
+
+        members.find(1).borrowBook(books.find(1));
+        members.find(1).returnBook(books.find(1));
+
+        members.find(1).borrowBook(books.find(2));
+        members.find(1).returnBook(books.find(2));
+
+        members.find(2).borrowBook(books.find(1));
+        members.find(2).returnBook(books.find(1));
+
+        members.find(3).borrowBook(books.find(3));
+        members.find(3).returnBook(books.find(3));
+
+        members.find(4).borrowBook(books.find(6));
+        members.find(5).borrowBook(books.find(7));
+        members.find(6).borrowBook(books.find(8));
+        members.find(7).borrowBook(books.find(9));
 
         System.out.println(books);
         System.out.println(members);
