@@ -6,7 +6,7 @@ public interface IMenu
 
     // retireve an object
     void searchForMember();
-    void searchForBook();
+    void searchForBooks();
 
     // remove
     void removeMember();

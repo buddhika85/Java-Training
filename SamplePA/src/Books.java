@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class Books extends Records
 {
     @Override
@@ -21,5 +24,16 @@ public class Books extends Records
     public String toString() 
     {
         return "Books\n" + super.toString();
+    }
+
+    public List<Book> findByAuthor(String author) 
+    {
+        LinkedList<Book> booksByAuthor = new LinkedList<>();
+        for (Record record : records) {
+            Book book = (Book) record;
+            if (book.getAuthor().equalsIgnoreCase(author))
+                booksByAuthor.add(book);
+        }
+        return booksByAuthor;
     }    
 }

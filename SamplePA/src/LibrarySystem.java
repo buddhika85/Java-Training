@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class LibrarySystem implements IMenu
 {
     // group class objects
@@ -31,7 +33,7 @@ public class LibrarySystem implements IMenu
             } 
             else if (choice == 4) 
             {
-                searchForBook();
+                searchForBooks();
             } 
             else if (choice == 5) 
             {
@@ -88,7 +90,7 @@ public class LibrarySystem implements IMenu
         System.out.println("  1. Add Member");
         System.out.println("  2. Add Book");
         System.out.println("  3. Search for Member");
-        System.out.println("  4. Search a Book");
+        System.out.println("  4. Search for Books by author");
         System.out.println("  5. Remove a Member");
         System.out.println("  6. Remove a Book");
         System.out.println("  7. Borrow a Book");
@@ -126,13 +128,30 @@ public class LibrarySystem implements IMenu
     @Override
     public void searchForMember() 
     {
-        displayHeading("Search for a Member By Name");
+        displayHeading("Search for a Member By Name");       
+        Member member = members.find(readString("Member Name?"));
+        if (member == null)
+            System.out.println("hmm -- member with such name does not exist in our records");
+        else
+            System.out.println("Member found.\n\t" + member + "\n");
     }
 
     @Override
-    public void searchForBook() 
+    public void searchForBooks() 
     {
-        displayHeading("Search Books by authors");
+        displayHeading("Search Books by author");
+        String author = readString("Author Name?");
+        List<Book> booksAbyAuthor = books.findByAuthor(author);
+        if (booksAbyAuthor.isEmpty())
+            System.out.println("\nNo books from such author");
+        else
+        {
+            System.out.println("Books of author - " + author);
+            for (Book book : booksAbyAuthor) {
+                System.out.println(book);
+            }
+        }
+        System.out.println("\n");
     }
 
     @Override
@@ -197,26 +216,20 @@ public class LibrarySystem implements IMenu
     private void populateTestData() 
     {
         books.add("Guliver Travels", "Jonathan Swift");
+        books.add("Five on a Treasure Island", "Enid Blyton");
         books.add("Jungle Book", "Rudyard Kipling");
+        books.add("If", "Rudyard Kipling");
+        books.add("The Enchanted Wood", "Enid Blyton");
+        books.add("Kim", "Rudyard Kipling");
+        books.add("Kipling's Poems", "Rudyard Kipling");
+        books.add("Brer Rabbit Book", "Enid Blyton");
+        books.add("The white mans burden", "Rudyard Kipling");
         members.add("James Gun", "james@gmail.com");
         members.add("John Smith", "john@gmail.com");
 
         System.out.println(books);
         System.out.println(members);
     }
-
-
-    // private int readInt(String question) 
-    // {
-    //     System.out.print(question + "\t");
-    //     return In.nextInt();
-    // }
-
-    // private double readDouble(String question) 
-    // {
-    //     System.out.print(question + "\t");
-    //     return In.nextDouble();
-    // }
 
     private String readString(String question) 
     {

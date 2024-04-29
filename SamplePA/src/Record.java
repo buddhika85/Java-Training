@@ -32,7 +32,7 @@ public abstract class Record
     // overload
     public boolean matches(String name)
     {
-        return this.name.equals(name);
+        return this.name.equalsIgnoreCase(name);
     }
     
     public void show()
