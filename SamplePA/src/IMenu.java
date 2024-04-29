@@ -17,11 +17,14 @@ public interface IMenu
     void returnBook();
 
     // generate a sub list
-    void displayBooksByGenre();         
+    // void displayBooksByGenre();         
     void displayAvailableBooks();    
     
     // sorting
     void displayBooksByPopularity();
     void displayMemebersInAsc();
     void displayMembersInDsc();
+
+    // full report
+    void displayFullReport();
 }

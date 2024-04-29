@@ -12,33 +12,192 @@ public class LibrarySystem implements IMenu
 
     private void runMainMenu() 
     {
-        System.out.println("--- Main menu ---");
-        while (true) {
-            System.out.println("Select an option:");
-            System.out.println("  1. Add Member");
-            System.out.println("  2. Add Book");
-            System.out.println("  1. Add Member");
-            System.out.println("  2. Add Book");
-            System.out.println("  3. Exit");
+        System.out.println("--- Welcome to Library System ---");
+        while (true) 
+        {
+            displayMainMenu();
             int choice = In.nextInt();
-            if (choice == 1) {
-                
-            } else if (choice == 2) {
-               
-            } else if (choice == 3) {
+            if (choice == 1) 
+            {
+                addMember();
+            } 
+            else if (choice == 2) 
+            {
+                addBook();
+            } 
+            else if (choice == 3) 
+            {
+                searchForMember();
+            } 
+            else if (choice == 4) 
+            {
+                searchForBook();
+            } 
+            else if (choice == 5) 
+            {
+                removeMember();
+            }
+            else if (choice == 6) 
+            {
+                removeBook();
+            }
+            else if (choice == 7) 
+            {
+                borrowBook();
+            }
+            else if (choice == 8) 
+            {
+                returnBook();
+            }
+            else if (choice == 9) 
+            {
+                displayAvailableBooks();
+            }
+            else if (choice == 10) 
+            {
+                displayBooksByPopularity();
+            }
+            else if (choice == 11) 
+            {
+                displayMemebersInAsc();
+            }
+            else if (choice == 12) 
+            {
+                displayMembersInDsc();
+            }
+            else if (choice == 13) 
+            {
+                displayFullReport();
+            } 
+            else if (choice == 14) 
+            {
                 break;
-            } else {
-                System.out.println("Pick an option 1, 2, or 3");
+            } 
+            else 
+            {
+                System.out.println("Pick an option 1, 2, .. 14");
             }
         }
 
         System.out.println("Exiting...");
     }
 
+    private void displayMainMenu() 
+    {
+        System.out.println("\nSelect an option:");
+        System.out.println("  1. Add Member");
+        System.out.println("  2. Add Book");
+        System.out.println("  3. Search for Member");
+        System.out.println("  4. Search a Book");
+        System.out.println("  5. Remove a Member");
+        System.out.println("  6. Remove a Book");
+        System.out.println("  7. Borrow a Book");
+        System.out.println("  8. Return a Book");    
+
+        System.out.println("  9. Display available Books");
+        System.out.println("  10. Display Books by popularity");
+        System.out.println("  11. Display Members by Name - ASC");
+        System.out.println("  12. Display Members by Name - DSC");
+        System.out.println("  13. Display Full Report");
+        System.out.println("  14. Exit");
+    }
+
+    
+    @Override
+    public void addMember() 
+    {
+        displayHeading("Add Member");
+        String name = readString("Name?");
+        String email = readString("Email?");
+        members.add(name, email);
+        displaySuccessMessage("Member Added");
+    }    
+
+    @Override
+    public void addBook() 
+    {
+        displayHeading("Add Book");
+        String name = readString("Name?");
+        String author = readString("Author?");
+        books.add(name, author);
+        displaySuccessMessage("Book Added");
+    }
+
+    @Override
+    public void searchForMember() 
+    {
+        displayHeading("Search for a Member By Name");
+    }
+
+    @Override
+    public void searchForBook() 
+    {
+        displayHeading("Search Books by authors");
+    }
+
+    @Override
+    public void removeMember() 
+    {
+        displayHeading("Remove Member");
+    }
+
+    @Override
+    public void removeBook() 
+    {
+        displayHeading("Remove Book");
+    }
+
+    @Override
+    public void borrowBook() 
+    {
+        displayHeading("Borrow Book");
+    }
+
+    @Override
+    public void returnBook() 
+    {
+        displayHeading("Return Book");
+    }
+
+  
+
+    @Override
+    public void displayAvailableBooks() 
+    {
+        displayHeading("Display all available Book");
+    }
+
+    @Override
+    public void displayBooksByPopularity() 
+    {
+        displayHeading("Display Book by popularity");
+    }
+
+    @Override
+    public void displayMemebersInAsc() 
+    {
+        displayHeading("Display members in ASC");
+    }
+
+    @Override
+    public void displayMembersInDsc() {
+        displayHeading("Display members in DSC");
+    }
+
+    
+    @Override
+    public void displayFullReport() 
+    {
+        displayHeading("Complete Report");        
+        System.out.println(books);
+        System.out.println(members);
+        displayFooter("End of Report");
+    }    
+
     private void populateTestData() 
     {
         books.add("Guliver Travels", "Jonathan Swift");
-        books.add("Jungle Book", "Jonathan Swift");
+        books.add("Jungle Book", "Rudyard Kipling");
         members.add("James Gun", "james@gmail.com");
         members.add("John Smith", "john@gmail.com");
 
@@ -46,83 +205,37 @@ public class LibrarySystem implements IMenu
         System.out.println(members);
     }
 
-    @Override
-    public void addMember() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addMember'");
+
+    // private int readInt(String question) 
+    // {
+    //     System.out.print(question + "\t");
+    //     return In.nextInt();
+    // }
+
+    // private double readDouble(String question) 
+    // {
+    //     System.out.print(question + "\t");
+    //     return In.nextDouble();
+    // }
+
+    private String readString(String question) 
+    {
+        System.out.print(question + "\t");
+        return In.nextLine();
     }
 
-    @Override
-    public void addBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBook'");
+    private void displaySuccessMessage(String message) 
+    {
+        System.out.println("Success - " + message + "\n");
     }
 
-    @Override
-    public void searchForMember() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchForMember'");
+    private void displayHeading(String heading) 
+    {
+        System.out.println("---------" + heading + "---------");
     }
 
-    @Override
-    public void searchForBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchForBook'");
+    private void displayFooter(String footer) 
+    {
+        System.out.println("---------" + footer + "---------");
     }
-
-    @Override
-    public void removeMember() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeMember'");
-    }
-
-    @Override
-    public void removeBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeBook'");
-    }
-
-    @Override
-    public void borrowBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'borrowBook'");
-    }
-
-    @Override
-    public void returnBook() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'returnBook'");
-    }
-
-    @Override
-    public void displayBooksByGenre() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayBooksByGenre'");
-    }
-
-    @Override
-    public void displayAvailableBooks() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayAvailableBooks'");
-    }
-
-    @Override
-    public void displayBooksByPopularity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayBooksByPopularity'");
-    }
-
-    @Override
-    public void displayMemebersInAsc() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayMemebersInAsc'");
-    }
-
-    @Override
-    public void displayMembersInDsc() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayMembersInDsc'");
-    }
-
-
 }
