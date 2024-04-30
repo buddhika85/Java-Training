@@ -16,8 +16,7 @@ public interface IMenu
     void borrowBook();
     void returnBook();
 
-    // generate a sub list
-    // void displayBooksByGenre();         
+    // generate a sub list         
     void displayAvailableBooks();    
     
     // sorting
