@@ -96,6 +96,13 @@ public class CircleAnimate extends Application
                     double currentRadius = c.getRadius();
                     c.setRadius(currentRadius * 1.1); // Increase radius
                 }
+
+                if (n instanceof Rectangle && n != pathRectangle) 
+                {
+                    Rectangle r = (Rectangle) n;
+                    r.setHeight(r.getHeight() * 1.1); // Decrease height
+                    r.setWidth(r.getWidth() * 1.1); // Decrease height
+                }
             }
         });
         Button shrinkButton = new Button("Shrink");
@@ -106,6 +113,13 @@ public class CircleAnimate extends Application
                     double currentRadius = c.getRadius();
                     c.setRadius(currentRadius * 0.9); // Decrease radius
                 }
+
+                if (n instanceof Rectangle && n != pathRectangle) 
+                {
+                    Rectangle r = (Rectangle) n;
+                    r.setHeight(r.getHeight() * 0.9); // Decrease height
+                    r.setWidth(r.getWidth() * 0.9); // Decrease height
+                }
             }
         });
 
@@ -113,8 +127,10 @@ public class CircleAnimate extends Application
         pathVisibilityButton.setOnAction(event -> {
             if (pathCircle.getOpacity() > 0) {
                 pathCircle.setOpacity(0); // Opacity 0 means invisible
+                pathRectangle.setOpacity(0);
             } else {
                 pathCircle.setOpacity(100);
+                pathRectangle.setOpacity(100);
             }
         });
 
