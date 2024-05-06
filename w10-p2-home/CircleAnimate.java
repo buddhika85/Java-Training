@@ -76,7 +76,7 @@ public class CircleAnimate extends Application
 
         PathTransition transitionRect = new PathTransition();
         transitionRect.setNode(movingRectangle);                                    // set which node to be animated?
-        transitionRect.setDuration(Duration.seconds(4));                            // for how long ?
+        transitionRect.setDuration(Duration.seconds(1));                            // for how long ?
         transitionRect.setPath(pathRectangle);    
         
         transitionRect.setInterpolator(Interpolator.LINEAR);  
