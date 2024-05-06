@@ -2,6 +2,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GraphicsExampleAnimatedMove2",
+            "request": "launch",
+            "mainClass": "GraphicsExampleAnimatedMove2",
+            "projectName": "w10-p2-home_3dba9fa1",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "GraphicsExampleAnimatedMove",
+            "request": "launch",
+            "mainClass": "GraphicsExampleAnimatedMove",
+            "projectName": "w10-p2-home_3dba9fa1",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "FlameOneGrahicsExample",
             "request": "launch",
             "mainClass": "FlameOneGrahicsExample",
