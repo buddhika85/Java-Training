@@ -5,7 +5,7 @@
             "name": "GraphicsExample",
             "request": "launch",
             "mainClass": "GraphicsExample",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",            
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -13,7 +13,7 @@
             "name": "CircleAnimate",
             "request": "launch",
             "mainClass": "CircleAnimate",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -21,7 +21,7 @@
             "name": "RectanglesExtra",
             "request": "launch",
             "mainClass": "RectanglesExtra",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -29,7 +29,7 @@
             "name": "Rectangles",
             "request": "launch",
             "mainClass": "Rectangles",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -37,7 +37,7 @@
             "name": "CirclesExtra",
             "request": "launch",
             "mainClass": "CirclesExtra",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -45,7 +45,7 @@
             "name": "Circles",
             "request": "launch",
             "mainClass": "Circles",
-            "projectName": "w10_db69dc4d",
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
