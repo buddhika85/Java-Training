@@ -11,6 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,18 +28,21 @@ public class CircleAnimate extends Application
         VBox root = new VBox(5);
 
         Pane pane = new Pane();
-        int sceneWidth = 400;
-        int sceneHeight = 400;
+        
+        int sceneWidth = 600;
+        int sceneHeight = 600;
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
 
+
+        // start circle animation
         Circle movingCircle = new Circle(10);
         movingCircle.setFill(Color.ORANGERED);
 
         Circle pathCircle = new Circle(100);
         pathCircle.setStroke(javafx.scene.paint.Color.BLACK);
         pathCircle.setFill(null); // Don't fill in the circle with any colour
-        pathCircle.setCenterX(sceneWidth / 2);
-        pathCircle.setCenterY(sceneHeight / 2);
+        pathCircle.setCenterX(150);
+        pathCircle.setCenterY(150);
 
         // The PathTransition class allows for nodes to smoothly move along a Path. This path can be set by any class that extends :Shape
         PathTransition transition = new PathTransition();
@@ -56,7 +60,33 @@ public class CircleAnimate extends Application
         transition.setCycleCount(PathTransition.INDEFINITE);                // Sets the number of times the animation should repeat. In our case we set an infinite loop on the animation.
         transition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);            //  it says that the node will always align perpendicular (90 degrees) to the tangent of the path 
 
+             
+        // end circle animation
+
+
+        // start rectangle animation
+        Rectangle movingRectangle = new Rectangle(25, 10);         // W, H
+        movingRectangle.setFill(Color.GREEN);
+
+        Rectangle pathRectangle = new Rectangle(100, 100);                // W, H, X, Y
+        pathRectangle.setStroke(javafx.scene.paint.Color.BLACK);
+        pathRectangle.setFill(null); // Don't fill in the circle with any colour
+        pathRectangle.setX(400);
+        pathRectangle.setY(400);
+
+        PathTransition transitionRect = new PathTransition();
+        transitionRect.setNode(movingRectangle);                                    // set which node to be animated?
+        transitionRect.setDuration(Duration.seconds(4));                            // for how long ?
+        transitionRect.setPath(pathRectangle);    
+        
+        transitionRect.setInterpolator(Interpolator.LINEAR);  
+        transitionRect.setCycleCount(PathTransition.INDEFINITE);                // Sets the number of times the animation should repeat. In our case we set an infinite loop on the animation.
+        transitionRect.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); 
+        // end rectangle animation
+
+
         pane.getChildren().addAll(pathCircle, movingCircle);
+        pane.getChildren().addAll(pathRectangle, movingRectangle);
 
         Button growButton = new Button("Grow");
         growButton.setOnAction(event -> {
@@ -98,5 +128,6 @@ public class CircleAnimate extends Application
         primaryStage.show();
 
         transition.play(); // Start the animation
+        transitionRect.play();
     }
 }
