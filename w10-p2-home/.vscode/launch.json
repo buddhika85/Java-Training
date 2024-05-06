@@ -2,10 +2,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FlameOneGrahicsExample",
+            "request": "launch",
+            "mainClass": "FlameOneGrahicsExample",
+            "projectName": "w10-p2-home_3dba9fa1",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "GraphicsExample",
             "request": "launch",
             "mainClass": "GraphicsExample",
-            "projectName": "w10-p2-home_3dba9fa1",            
+            "projectName": "w10-p2-home_3dba9fa1",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
