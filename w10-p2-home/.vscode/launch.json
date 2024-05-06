@@ -1,0 +1,52 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "GraphicsExample",
+            "request": "launch",
+            "mainClass": "GraphicsExample",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "CircleAnimate",
+            "request": "launch",
+            "mainClass": "CircleAnimate",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "RectanglesExtra",
+            "request": "launch",
+            "mainClass": "RectanglesExtra",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Rectangles",
+            "request": "launch",
+            "mainClass": "Rectangles",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "CirclesExtra",
+            "request": "launch",
+            "mainClass": "CirclesExtra",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Circles",
+            "request": "launch",
+            "mainClass": "Circles",
+            "projectName": "w10_db69dc4d",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
