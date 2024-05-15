@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ButtonClick",
+            "request": "launch",
+            "mainClass": "ButtonClick",
+            "projectName": "p2-w11_646639fe",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
