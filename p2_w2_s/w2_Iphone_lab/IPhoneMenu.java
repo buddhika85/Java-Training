@@ -2,6 +2,10 @@ public class IPhoneMenu
 {
     private IPhone iPhone = new IPhone();
 
+    public static void main(String[] args) {
+        new IPhoneMenu().runMainMenu();
+    }
+
     void runMainMenu() 
     {
         System.out.println("--- IPhone menu ---");

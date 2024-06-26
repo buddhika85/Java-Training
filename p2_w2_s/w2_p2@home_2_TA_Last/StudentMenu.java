@@ -26,7 +26,7 @@ public class StudentMenu {
             System.out.println("  2. View Assessments");
             System.out.println("  3. Modify grade of an assessment");
             System.out.println("  4. Change selected unit");
-            System.out.println("  4. Exit");
+            System.out.println("  5. Exit");
             int choice = In.nextInt();
             if (choice == 1) 
             {
@@ -68,7 +68,7 @@ public class StudentMenu {
 
     private void addAssessment() 
     {
-        System.out.println("--- Add assessment sub menu ---");
+        System.out.println("\n--- Add assessment sub menu ---");
         while (true) {
             System.out.println("Select an option:");
             System.out.println("  1. Add assessment by mark");
@@ -93,7 +93,7 @@ public class StudentMenu {
         System.out.println("\nAdd Assessment By Grade ");
         System.out.println("Please provide assessment name: ");
         String name = In.nextLine();        
-        student.addAssessment(name, readGrade());
+        student.addAssessment(name, readGrade(), selectedUnit);
     }
 
     private Grade readGrade()
@@ -132,13 +132,18 @@ public class StudentMenu {
         int mark = In.nextInt();
 
         // we will assume here that total mark is 100 for simplicity
-        student.addAssessment(name, mark, 100);
+        student.addAssessment(name, mark, 100, selectedUnit);
     }    
 
     private void viewAssessments() 
     {
-        System.out.println("\nView Student Assessments ");
-        for (Assessment assessment : student.assessments) {
+        System.out.println("\nView Student Assessments \nProgramming 1");
+        for (Assessment assessment : student.assessmentsProgramming1) {
+            System.out.println("\t" + assessment);
+        }
+
+        System.out.println("\nProgramming 2");
+        for (Assessment assessment : student.assessmentsProgramming2) {
             System.out.println("\t" + assessment);
         }
     }
@@ -148,7 +153,7 @@ public class StudentMenu {
         System.out.println("\nModify Assessment ");
         System.out.println("Please provide assessment name: ");
         String name = In.nextLine();
-        Assessment assessment = student.getAssessmentByName(name);
+        Assessment assessment = student.getAssessmentByName(name, selectedUnit);
         if (assessment == null)
         {
             System.out.println("Error: assessment not found");
@@ -157,5 +162,6 @@ public class StudentMenu {
         }
 
         assessment.penalise(readGrade());
+        System.out.println("Success: Assessment grade modified.");
     }
 }
