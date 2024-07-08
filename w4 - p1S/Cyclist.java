@@ -19,6 +19,12 @@ public class Cyclist
         return 0.5 * this.preparation + 0.25 * this.endurance + 0.25 * this.sprintAbility;   
     }
 
+    public String toString() {
+        return name + ", endurance: " + this.endurance 
+            + ", sprint ability: " + this.sprintAbility
+            + ", preparation: " + this.preparation;
+    }
+
     public static void main(String[] args) {
         Cyclist cyclistJack = new Cyclist("Jack", 90, 80, 90);
         Cyclist cyclistJill = new Cyclist("Jill", 100, 90, 70);
