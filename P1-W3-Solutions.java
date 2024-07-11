@@ -42,7 +42,6 @@ class WhileLoops {
 
         System.out.println(hey);
 
-        // To make it print 20 times, just replace 5 above with 20
     }
 }
 
