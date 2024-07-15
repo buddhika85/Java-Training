@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -126,27 +127,58 @@ enum PodcastGenre {
     HISTORY,
 }
 
-class PlayList {
+class PlayList 
+{
     List<Integer> list;
+
+    public PlayList(List<Integer> list) {
+        this.list = list;
+    }
+
+    // return a PlayList object that indexes playListSize random songs in the library. 
+    //  calling PlayList.generateRandomPlayList(20, 3) generates a random play-list of 3 tracks
+    //  (e.g. [4, 15, 7]) out of a library of 20 tracks.
+    static PlayList generateRandomPlayList(int numberOfTracksInLibrary, int playListSize)
+    {
+        ArrayList<Integer> libraryIndexes = new ArrayList<>();
+        for (int i = 0; i < numberOfTracksInLibrary; i++) {
+            libraryIndexes.add(i);
+        }
+
+        Collections.shuffle(libraryIndexes);
+
+        // take the first playListSize elements from libraryIndexes       
+        List<Integer> subListOfIndexes = libraryIndexes.subList(0, playListSize);
+        return new PlayList(subListOfIndexes);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayList " + list;
+    }
+}
+
+interface ListenPlayList {
+    void listenToPlayList(PlayList playList);
 }
 
 interface ListPodcasts {
-    ArrayList<Podcast> listPodcasts();
+    List<Podcast> listPodcasts();
 }
 
 interface ListSongs {
     // List all songs
-    ArrayList<Song> listSongs();
+    List<Song> listSongs();
 
     // List songs by artist
-    ArrayList<Song> listSongs(String artist);
+    List<Song> listSongs(String artist);
 }
 
 interface PlaySongs {
     void playSongs(ArrayList<Song> songs);
 }
 
-class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
+class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs, ListenPlayList {
     AudioTrack[] library;
     PlayMode currentPlayMode;
 
@@ -211,11 +243,42 @@ class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
         } else {
             // Randomised playback. There are a couple of ways to do this.
             // We'll randomly pick a song out of the ArrayList, then remove it.
-            while (!songs.isEmpty()) {
-                Random rand = new Random();
-                int choice = rand.nextInt(songs.size());
-                songs.get(choice).play();
-                songs.remove(choice);
+            // while (!songs.isEmpty()) {
+            //     Random rand = new Random();
+            //     int choice = rand.nextInt(songs.size());
+            //     songs.get(choice).play();
+            //     songs.remove(choice);
+            // }
+
+            // alternative
+            Collections.shuffle(songs);     // Randomised
+            for (Song s : songs) {
+                s.play();
+            }
+        }
+    }
+
+    @Override
+    public void listenToPlayList(PlayList playList) 
+    {
+        if (this.currentPlayMode == PlayMode.LINEAR) {
+            for (int index : playList.list) {
+                this.library[index].play();
+            }
+        } else if (this.currentPlayMode == PlayMode.REPEAT) {
+            while (true) {
+                for (int index : playList.list) {
+                    this.library[index].play();
+                }
+                System.out.println("Would you like to continue (y/n)?");
+                if (In.nextChar() == 'n') {
+                    break;
+                }
+            }
+        } else {
+            Collections.shuffle(playList.list);     // Randomised
+            for (int index : playList.list) {
+                this.library[index].play();
             }
         }
     }
@@ -264,10 +327,14 @@ class TestLibrary {
 
         MusicPlayer mp = new MusicPlayer(library, PlayMode.SHUFFLE);
 
-        ArrayList<Song> songs = new ArrayList<>();
-        songs.add((Song) library[3]);
-        songs.add((Song) library[5]);
-        songs.add((Song) library[6]);
-        mp.playSongs(songs);
+        // ArrayList<Song> songs = new ArrayList<>();
+        // songs.add((Song) library[3]);
+        // songs.add((Song) library[5]);
+        // songs.add((Song) library[6]);
+        // mp.playSongs(songs);
+
+        PlayList playList = PlayList.generateRandomPlayList(library.length, 2);
+        System.out.println(playList);
+        mp.listenToPlayList(playList);
     }
 }
