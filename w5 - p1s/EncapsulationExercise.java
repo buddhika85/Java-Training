@@ -11,6 +11,10 @@ public class EncapsulationExercise {
         if (jane != null) {
             System.out.println("The company has somebody named " + jane);
         }
+		else
+		{
+			System.out.println("Employee not found");
+		}
 
         Employee gauis = c.findByFirstName("Gaius");
         if (gauis != null) {
