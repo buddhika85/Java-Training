@@ -1,23 +1,44 @@
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Arrays;
 
-abstract class AudioTrack {
-    int durationInSeconds;
-    String name;
+abstract class AudioTrack 
+{
+    protected int durationInSeconds;
+    protected String name;
     // Counts the number of times track was played.
-    int playCount;
+    protected int playCount;
 
-    AudioTrack(String name, int durationInSeconds) {
+    // comparators
+    public static final Comparator<AudioTrack> COMP_PLAY_COUNT_DESC = 
+        Comparator.comparing(AudioTrack :: getPlayCount).reversed();
+
+    public static final Comparator<AudioTrack> COMP_NAME = 
+        Comparator.comparing(AudioTrack :: getName);
+    
+    public static final Comparator<AudioTrack> COMP_DURATION = 
+        Comparator.comparing(AudioTrack :: getDurationInSeconds);
+
+    AudioTrack(String name, int durationInSeconds) 
+    {
         this.name = name;
         this.durationInSeconds = durationInSeconds;
         this.playCount = 0;
     }
+   
+    public int getPlayCount() 
+    {
+        return playCount;
+    }
 
     // Play the track for some random duration. Returns ListeningDuration
     // corresponding to how long the track was listened to.
-    ListeningDuration play() {
+    ListeningDuration play() 
+    {
+        ++playCount;
         ListeningDuration listeningDuration = ListeningDuration.YET_TO_LISTEN;
         Random rand = new Random();
         int choice = rand.nextInt(5);
@@ -35,6 +56,22 @@ abstract class AudioTrack {
             System.out.println("Unreachable code");
         }
         return listeningDuration;
+    }
+
+    public int getDurationInSeconds() {
+        return durationInSeconds;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static Comparator<AudioTrack> getCompPlayCountDesc() {
+        return COMP_PLAY_COUNT_DESC;
+    }
+
+    public static Comparator<AudioTrack> getCompName() {
+        return COMP_NAME;
     }
 
 }
@@ -111,6 +148,29 @@ class Song extends AudioTrack {
     public String toString() {
         return super.name + ", by " + this.artist;
     }
+}
+
+class IndexedTrack 
+{
+    AudioTrack track;
+    int index;
+
+    IndexedTrack(AudioTrack song, int index) {
+        this.track = song;
+        this.index = index;
+    }
+
+    int getDuration() {
+        return this.track.getDurationInSeconds();
+    }
+
+    String getName() {
+        return this.track.getName();
+    }
+
+    static final Comparator<IndexedTrack> byDuration = Comparator.comparing(IndexedTrack::getDuration);
+    static final Comparator<IndexedTrack> byName = Comparator.comparing(IndexedTrack::getName);
+
 }
 
 enum MusicGenre {
@@ -194,15 +254,59 @@ interface UsePlayList
 
 class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList 
 {
-    AudioTrack[] library;
+    List<AudioTrack> library;
     PlayMode currentPlayMode;
-    private List<PlayList> userPlayLists;
+    private List<PlayList> userPlayLists;    
 
     MusicPlayer(AudioTrack[] library, PlayMode playmode) 
     {
-        this.library = library;
+        this.library = new ArrayList<>(Arrays.asList(library));;
         this.currentPlayMode = playmode;
         this.userPlayLists = new ArrayList<>();
+    }
+
+    public void listMostPlayedTracks() 
+    {
+        // Make a copy of the library attribute
+        ArrayList<AudioTrack> libraryCopy = new ArrayList<>(this.library);
+
+        // Sort libraryCopy and report (print) the most frequently played songs.
+        Collections.sort(libraryCopy, AudioTrack.COMP_PLAY_COUNT_DESC);
+        for (int i = 0; i < libraryCopy.size(); i++) 
+        {
+            // How can you filter out songs that were never played?
+            if (libraryCopy.get(i).playCount > 0)
+            {
+                System.out.println("Rank " + (i + 1) + " " + libraryCopy.get(i) + " - Play count = " + libraryCopy.get(i).playCount);
+            }
+            else
+            {
+                System.out.println("Rank " + (i + 1) + " " + libraryCopy.get(i) + " - Never played");
+            }
+        }        
+    }
+
+    void sortPlayList(PlayList p) 
+    {
+        
+        // 1. Use p.trackIndexes to create an `ArrayList<IndexedTracks> indexedTracks`
+        List<IndexedTrack> indexedTracks = new ArrayList<>();
+        for (int indexOfTrack : p.trackIndexes) 
+        {
+            indexedTracks.add(new IndexedTrack(this.library.get(indexOfTrack), indexOfTrack));
+        }
+
+        // 2. Use a comparator within `indexedTracks` to sort this ArrayList
+        Collections.sort(indexedTracks, IndexedTrack.byName);
+
+        // 3. Call `p.trackIndexes.clear();` to clear out the playlist entries, then
+        p.trackIndexes.clear();
+
+        //    use `indexedTracks` to repopulate the indexes.
+        for (IndexedTrack indexedTrack : indexedTracks) 
+        {
+            p.trackIndexes.add(indexedTrack.index);
+        }
     }
 
     @Override
@@ -211,9 +315,9 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            if (this.library[i] instanceof Podcast) 
+            if (this.library.get(i) instanceof Podcast) 
             {
                 libraryIndexes.add(i);
             }
@@ -227,9 +331,9 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            AudioTrack t = this.library[i];
+            AudioTrack t = this.library.get(i);
             if (t instanceof Podcast) 
             {
                 Podcast p = (Podcast) t;
@@ -248,9 +352,9 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            if (this.library[i] instanceof Song) 
+            if (this.library.get(i) instanceof Song) 
             {
                 libraryIndexes.add(i);
             }
@@ -264,10 +368,10 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            AudioTrack t = this.library[i];
-            if (this.library[i] instanceof Song) 
+            AudioTrack t = this.library.get(i);
+            if (this.library.get(i) instanceof Song) 
             {
                 Song s = (Song) t;
                 if (s.artist.equals(artist)) 
@@ -309,7 +413,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
     {
 
         ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < this.library.length; i++) {
+        for (int i = 0; i < this.library.size(); i++) {
             list.add(i);
         }
 
@@ -326,7 +430,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         {
             for (Integer i : listCopy) 
             {
-                this.library[i].play();
+                this.library.get(i).play();
             }
         } 
         else if (this.currentPlayMode == PlayMode.REPEAT) 
@@ -334,7 +438,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
             while (true) {
                 for (Integer i : listCopy) 
                 {
-                    this.library[i].play();
+                    this.library.get(i).play();
                 }
                 System.out.println("Would you like to continue (y/n)?");
                 if (In.nextChar() == 'y') 
@@ -348,7 +452,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
             Collections.shuffle(listCopy);
             for (Integer i : listCopy) 
             {
-                this.library[i].play();
+                this.library.get(i).play();
             }
         }
 
@@ -359,7 +463,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
     {
         for (int i = 0; i < playList.trackIndexes.size(); i++) 
         {
-            System.out.println("  " + i + ". " + this.library[playList.trackIndexes.get(i)]);
+            System.out.println("  " + i + ". " + this.library.get(playList.trackIndexes.get(i)));
         }
     }
 
@@ -371,7 +475,7 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
 
     public AudioTrack getTrack(int trackIndex) 
     {
-        return this.library[trackIndex];
+        return this.library.get(trackIndex);
     }  
 
     public List<PlayList> getUserPlayLists() {
@@ -385,10 +489,10 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            if (this.library[i] instanceof Song &&
-                ((Song)this.library[i]).genre == genre) 
+            if (this.library.get(i) instanceof Song &&
+                ((Song)this.library.get(i)).genre == genre) 
             {
                 libraryIndexes.add(i);
             }
@@ -403,15 +507,36 @@ class MusicPlayer implements ListTracks, UserPlayLists, UsePlayList
         ArrayList<Integer> libraryIndexes = new ArrayList<>();
 
         // Need indexes so will have to use a traditional for-loop
-        for (int i = 0; i < this.library.length; i++) 
+        for (int i = 0; i < this.library.size(); i++) 
         {
-            if (this.library[i] instanceof Song &&
-                ((Song)this.library[i]).durationInSeconds >= minimumDuration) 
+            if (this.library.get(i) instanceof Song &&
+                ((Song)this.library.get(i)).durationInSeconds >= minimumDuration) 
             {
                 libraryIndexes.add(i);
             }
         }
         return new PlayList("All songs of atleast duration: " + minimumDuration, libraryIndexes);
+    }
+
+    public boolean isSongExists(Song song) 
+    {
+        for (AudioTrack audioTrack : library) 
+        {
+            if (audioTrack instanceof Song)
+            {
+                Song currentSong = (Song) audioTrack;
+                if (currentSong.name.equalsIgnoreCase(song.name) && currentSong.artist.equals(song.artist))
+                {
+                    return true;
+                }
+            }    
+        }
+        return false;
+    }
+
+    public void addToLibrary(AudioTrack track) 
+    {
+        this.library.add(track);
     }
 }
 

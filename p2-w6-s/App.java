@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class App 
 {
     MusicPlayer musicPlayer;
@@ -25,7 +27,10 @@ public class App
             System.out.println("Select an option:");
             System.out.println("  1. List songs");
             System.out.println("  2. Your playlists");
-            System.out.println("  3. Exit");
+            System.out.println("  3. Add song");
+            System.out.println("  4. Your podcast");
+            System.out.println("  5. View song playcounts");
+            System.out.println("  6. Exit");
             int choice = In.nextInt();
             if (choice == 1) 
             {
@@ -37,6 +42,18 @@ public class App
             } 
             else if (choice == 3) 
             {
+                addSong();
+            } 
+            else if (choice == 4) 
+            {
+                addPodcast();
+            } 
+            else if (choice == 5) 
+            {
+                viewSongPlayCounts();
+            } 
+            else if (choice == 6) 
+            {
                 break;
             } 
             else 
@@ -45,6 +62,78 @@ public class App
             }
         }
 
+    }
+
+    private void viewSongPlayCounts() 
+    {
+        musicPlayer.listMostPlayedTracks();
+    }
+
+    private void addPodcast() 
+    {
+        System.out.println("ADD A NEW PODCAST - DIP -----------------");
+    }
+
+    private void addSong() 
+    {
+        System.out.println("ADD A NEW SONG -----------------");
+        Song song = readSongInputs();
+        if (musicPlayer.isSongExists(song))
+        {          
+            System.out.println("Error - song with same name, same artist already exists");  
+            return;
+        }
+
+        musicPlayer.addToLibrary(song);
+        System.out.println("Song Added: " +  song);
+    }
+
+    private Song readSongInputs() 
+    {
+        return new Song(
+            readString("Please enter Name of Song? "), 
+            readInt("Please enter duration[As a whole number] : "), 
+            readString("Please provide artist?"), 
+            readGenre());
+    }
+
+    private MusicGenre readGenre() 
+    {
+        boolean hasInputRead = false;
+        int input = 0;
+        MusicGenre[] allGenres = MusicGenre.values();
+        while(!hasInputRead)
+        {
+            System.out.println("Please select a music genre:");
+            // display all options            
+            for (int i = 0; i < allGenres.length; i++) 
+            {
+                System.out.println("\t" + (i + 1) + " - " + allGenres[i]);
+            }
+
+            input = In.nextInt();
+            if (input <= 0 || input > allGenres.length) 
+            {
+                System.out.println("Error - invalid input, Please provide an input between 1 and " + allGenres.length + ".");
+            }
+            else
+            {
+                hasInputRead = true;
+            }
+        }
+        return allGenres[input];        
+    }
+
+    private int readInt(String question) 
+    {
+        System.out.println(question);
+        return In.nextInt();
+    }
+
+    private String readString(String question) 
+    {
+        System.out.println(question);
+        return In.nextLine();
     }
 
     void listSongsMenu() 
@@ -74,20 +163,96 @@ public class App
             System.out.println("Select an option:");
             System.out.println("  1. Create a new playlist");
             System.out.println("  2. Listen to a playlist");
-            System.out.println("  3. Back to main-menu");
+            System.out.println("  3. Display playlist");
+            System.out.println("  4. View sorted playlist");
+            System.out.println("  5. Back to main-menu");
             System.out.println();
             int choice = In.nextInt();
-            if (choice == 1) {
+            if (choice == 1) 
+            {
                 createPlayListMenu();
-            } else if (choice == 2) {
+            } 
+            else if (choice == 2) 
+            {
                 listenPlayListMenu();
-            } else if (choice == 3) {
+            } 
+            else if (choice == 3) 
+            {
+                viewPlayList();
+            }
+            else if (choice == 4) 
+            {
+                viewSortedPlayList();
+            }
+            else if (choice == 5) 
+            {
                 break;
-            } else {
+            } 
+            else {
                 System.out.println("Pick an option 1, 2, or 3");
             }
         }
 
+    }
+
+    private void viewPlayList() 
+    {
+        System.out.println();
+        System.out.println("VIEW PLAYLIST -----------------");
+        if (this.musicPlayer.getUserPlayLists().isEmpty()) 
+        {
+            System.out.println("No playlists...");
+            return;
+        }
+
+        int numPlaylists = this.musicPlayer.getUserPlayLists().size();
+        for (int i = 0; i < numPlaylists; i++) 
+        {
+            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.getUserPlayLists().get(i).name);
+        }
+        System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
+        int choice = In.nextInt();
+        if (choice >= 1 && choice <= numPlaylists) 
+        {
+            PlayList p = this.musicPlayer.getPlayList(choice - 1);
+            for (int index : p.trackIndexes) 
+            {
+                AudioTrack track = musicPlayer.getTrack(index);
+                System.out.println("\t" + track);
+            }
+        }
+    }
+
+    private void viewSortedPlayList() 
+    {
+        System.out.println();
+        System.out.println("VIEW SORTED PLAYLIST -----------------");
+        if (this.musicPlayer.getUserPlayLists().isEmpty()) 
+        {
+            System.out.println("No playlists...");
+            return;
+        }
+
+        int numPlaylists = this.musicPlayer.getUserPlayLists().size();
+        for (int i = 0; i < numPlaylists; i++) 
+        {
+            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.getUserPlayLists().get(i).name);
+        }
+        System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
+        int choice = In.nextInt();
+        if (choice >= 1 && choice <= numPlaylists) 
+        {
+            PlayList p = this.musicPlayer.getPlayList(choice - 1);
+            PlayList copy = new PlayList(p.name, new ArrayList<>(p.trackIndexes));
+            this.musicPlayer.sortPlayList(copy);       // sort a copy - without effecting to orginal playlist
+            
+            // display after sorting
+            for (int index : copy.trackIndexes) 
+            {
+                AudioTrack track = musicPlayer.getTrack(index);
+                System.out.println("\t" + track);
+            }
+        }
     }
 
     void createPlayListMenu() 
