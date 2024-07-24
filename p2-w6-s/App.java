@@ -8,6 +8,14 @@ public class App
     {
         AudioTrack[] library = Library.LIBRARY;
         this.musicPlayer = new MusicPlayer(library, PlayMode.LINEAR);
+
+        // Test Data - custom play list for testing purposes
+        PlayList customPlayList = new PlayList("Custom");
+        customPlayList.addTrack(1);
+        customPlayList.addTrack(3);
+        customPlayList.addTrack(5);
+        customPlayList.addTrack(7);
+        this.musicPlayer.userPlayLists.add(customPlayList);
     }
 
     public static void main(String[] args) 
@@ -27,10 +35,11 @@ public class App
             System.out.println("Select an option:");
             System.out.println("  1. List songs");
             System.out.println("  2. Your playlists");
-            System.out.println("  3. Add song");
-            System.out.println("  4. Your podcast");
-            System.out.println("  5. View song playcounts");
-            System.out.println("  6. Exit");
+            System.out.println("  3. List songs by genre");
+            System.out.println("  4. List songs by min duration");
+            System.out.println("  5. Add song");
+            System.out.println("  6. List Most Popular Tracks");
+            System.out.println("  7. Exit");
             int choice = In.nextInt();
             if (choice == 1) 
             {
@@ -42,18 +51,23 @@ public class App
             } 
             else if (choice == 3) 
             {
-                addSong();
+                listSongsByGenre();
             } 
             else if (choice == 4) 
             {
-                addPodcast();
+                listSongsByMinDuration();
             } 
             else if (choice == 5) 
             {
-                viewSongPlayCounts();
+                addSong();
             } 
             else if (choice == 6) 
             {
+                displayPopularity();
+            } 
+            else if (choice == 7) 
+            {
+                System.out.println("Exiting -  bye...");
                 break;
             } 
             else 
@@ -64,64 +78,46 @@ public class App
 
     }
 
-    private void viewSongPlayCounts() 
+    private void displayPopularity() 
     {
+        System.out.println("MOST POPULAR SONGS-----------------");
         musicPlayer.listMostPlayedTracks();
-    }
-
-    private void addPodcast() 
-    {
-        System.out.println("ADD A NEW PODCAST - DIP -----------------");
     }
 
     private void addSong() 
     {
-        System.out.println("ADD A NEW SONG -----------------");
+        System.out.println("ADD SONG-----------------");
         Song song = readSongInputs();
         if (musicPlayer.isSongExists(song))
-        {          
-            System.out.println("Error - song with same name, same artist already exists");  
-            return;
+        {
+            System.out.println("Error - song already exists with music player library");
         }
-
-        musicPlayer.addToLibrary(song);
-        System.out.println("Song Added: " +  song);
+        else
+        {
+            musicPlayer.addSong(song);
+            System.out.println("Success - song added : " + song);
+        }
     }
 
     private Song readSongInputs() 
     {
-        return new Song(
-            readString("Please enter Name of Song? "), 
-            readInt("Please enter duration[As a whole number] : "), 
-            readString("Please provide artist?"), 
-            readGenre());
+        //return new Song(readString("Name of Song? "), readInt("Duration in seconds? "), readString("Artist ? "), readGenre());
+
+        String name = readString("Name of Song? ");
+        int duration = readInt("Duration in seconds? ");
+        String artist = readString("Artist ? ");
+        MusicGenre genre = readGenre();
+        return new Song(name, duration, artist, genre);
     }
 
-    private MusicGenre readGenre() 
+    private void listSongsByMinDuration() 
     {
-        boolean hasInputRead = false;
-        int input = 0;
-        MusicGenre[] allGenres = MusicGenre.values();
-        while(!hasInputRead)
-        {
-            System.out.println("Please select a music genre:");
-            // display all options            
-            for (int i = 0; i < allGenres.length; i++) 
-            {
-                System.out.println("\t" + (i + 1) + " - " + allGenres[i]);
-            }
+        System.out.println("LIST SONGS BY MIN DURATION-----------------");
+        int minDuration = readInt("Min duration?");
+        PlayList playList = musicPlayer.listSongs(minDuration);
 
-            input = In.nextInt();
-            if (input <= 0 || input > allGenres.length) 
-            {
-                System.out.println("Error - invalid input, Please provide an input between 1 and " + allGenres.length + ".");
-            }
-            else
-            {
-                hasInputRead = true;
-            }
-        }
-        return allGenres[input];        
+        System.out.println("Songs with min duration " + minDuration);
+        musicPlayer.displayPlayList(playList);
     }
 
     private int readInt(String question) 
@@ -134,6 +130,41 @@ public class App
     {
         System.out.println(question);
         return In.nextLine();
+    }
+
+    private void listSongsByGenre() 
+    {
+        System.out.println("LIST SONGS BY GENRE-----------------");
+        MusicGenre genre = readGenre();
+        PlayList playList = musicPlayer.listSongs(genre);
+
+        System.out.println("Songs on Genre " + genre);
+        musicPlayer.displayPlayList(playList);
+    }
+
+    private MusicGenre readGenre() 
+    {
+        MusicGenre[] genres = MusicGenre.values();
+        MusicGenre selectedGenre = null;
+        while(selectedGenre == null)
+        {
+            System.out.println("Select a genre (1-" + genres.length + "): ");
+            for (int i = 0; i < genres.length; i++) 
+            {
+                System.out.println("\t" + (i + 1) + " for " + genres[i]);    
+            }
+
+            int input = In.nextInt();
+            if (input <= 0 || input > genres.length)
+            {
+                System.out.println("Error - invalid input");
+            }
+            else
+            {
+                selectedGenre = genres[input - 1]; // convert to index
+            }
+        }
+        return selectedGenre;
     }
 
     void listSongsMenu() 
@@ -163,8 +194,8 @@ public class App
             System.out.println("Select an option:");
             System.out.println("  1. Create a new playlist");
             System.out.println("  2. Listen to a playlist");
-            System.out.println("  3. Display playlist");
-            System.out.println("  4. View sorted playlist");
+            System.out.println("  3. View a playlist");
+            System.out.println("  4. Sort and view a playlist");
             System.out.println("  5. Back to main-menu");
             System.out.println();
             int choice = In.nextInt();
@@ -179,79 +210,70 @@ public class App
             else if (choice == 3) 
             {
                 viewPlayList();
-            }
+            } 
             else if (choice == 4) 
             {
-                viewSortedPlayList();
-            }
+                sortAndViewPlayList();
+            } 
             else if (choice == 5) 
             {
                 break;
             } 
-            else {
-                System.out.println("Pick an option 1, 2, or 3");
-            }
-        }
-
-    }
-
-    private void viewPlayList() 
-    {
-        System.out.println();
-        System.out.println("VIEW PLAYLIST -----------------");
-        if (this.musicPlayer.getUserPlayLists().isEmpty()) 
-        {
-            System.out.println("No playlists...");
-            return;
-        }
-
-        int numPlaylists = this.musicPlayer.getUserPlayLists().size();
-        for (int i = 0; i < numPlaylists; i++) 
-        {
-            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.getUserPlayLists().get(i).name);
-        }
-        System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
-        int choice = In.nextInt();
-        if (choice >= 1 && choice <= numPlaylists) 
-        {
-            PlayList p = this.musicPlayer.getPlayList(choice - 1);
-            for (int index : p.trackIndexes) 
+            else 
             {
-                AudioTrack track = musicPlayer.getTrack(index);
-                System.out.println("\t" + track);
+                System.out.println("Pick an option 1, 2, 3, 4 or 5");
             }
         }
+
     }
 
-    private void viewSortedPlayList() 
+    private void sortAndViewPlayList() 
     {
         System.out.println();
-        System.out.println("VIEW SORTED PLAYLIST -----------------");
-        if (this.musicPlayer.getUserPlayLists().isEmpty()) 
+        System.out.println("SORT AND VIEW A PLAYLIST -----------------");
+        if (this.musicPlayer.userPlayLists.isEmpty()) 
         {
             System.out.println("No playlists...");
             return;
         }
 
-        int numPlaylists = this.musicPlayer.getUserPlayLists().size();
+        int numPlaylists = this.musicPlayer.userPlayLists.size();
         for (int i = 0; i < numPlaylists; i++) 
         {
-            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.getUserPlayLists().get(i).name);
+            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.userPlayLists.get(i).name);
         }
-        System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
+        System.out.print("Select a playlist to sort (1 - " + numPlaylists + "): ");
         int choice = In.nextInt();
         if (choice >= 1 && choice <= numPlaylists) 
         {
             PlayList p = this.musicPlayer.getPlayList(choice - 1);
             PlayList copy = new PlayList(p.name, new ArrayList<>(p.trackIndexes));
-            this.musicPlayer.sortPlayList(copy);       // sort a copy - without effecting to orginal playlist
-            
-            // display after sorting
-            for (int index : copy.trackIndexes) 
-            {
-                AudioTrack track = musicPlayer.getTrack(index);
-                System.out.println("\t" + track);
-            }
+            this.musicPlayer.sortPlayList(copy);
+            this.musicPlayer.displayPlayList(copy);
+        }
+    }
+
+    private void viewPlayList() 
+    {
+        System.out.println();
+        System.out.println("VIEW A PLAYLIST -----------------");
+        if (this.musicPlayer.userPlayLists.isEmpty()) 
+        {
+            System.out.println("No playlists...");
+            return;
+        }
+
+        int numPlaylists = this.musicPlayer.userPlayLists.size();
+        for (int i = 0; i < numPlaylists; i++) 
+        {
+            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.userPlayLists.get(i).name);
+        }
+        System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
+        int choice = In.nextInt();
+        if (choice >= 1 && choice <= numPlaylists) 
+        {
+            PlayList p = this.musicPlayer.getPlayList(choice - 1);
+            this.musicPlayer.displayPlayList(p);
         }
     }
 
@@ -358,16 +380,16 @@ public class App
     {
         System.out.println();
         System.out.println("LISTEN TO PLAYLIST -----------------");
-        if (this.musicPlayer.getUserPlayLists().isEmpty()) 
+        if (this.musicPlayer.userPlayLists.isEmpty()) 
         {
             System.out.println("No playlists...");
             return;
         }
 
-        int numPlaylists = this.musicPlayer.getUserPlayLists().size();
+        int numPlaylists = this.musicPlayer.userPlayLists.size();
         for (int i = 0; i < numPlaylists; i++) 
         {
-            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.getUserPlayLists().get(i).name);
+            System.out.println("  " + (i + 1) + ". " + this.musicPlayer.userPlayLists.get(i).name);
         }
         System.out.print("Select a playlist (1 - " + numPlaylists + "): ");
         int choice = In.nextInt();
