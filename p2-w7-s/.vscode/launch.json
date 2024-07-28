@@ -2,6 +2,30 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersonEditor",
+            "request": "launch",
+            "mainClass": "PersonEditor",
+            "projectName": "@HomeW7P2_2682df16",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - Sydney - 2024 June\\p2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ButtonClick",
+            "request": "launch",
+            "mainClass": "ButtonClick",
+            "projectName": "@HomeW7P2_2682df16",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - Sydney - 2024 June\\p2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Second",
+            "request": "launch",
+            "mainClass": "Second",
+            "projectName": "@HomeW7P2_2682df16",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - Sydney - 2024 June\\p2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "First",
             "request": "launch",
             "mainClass": "First",
