@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "First",
+            "request": "launch",
+            "mainClass": "First",
+            "projectName": "@HomeW7P2_2682df16",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - Sydney - 2024 June\\p2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
