@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +16,7 @@ public class PersonEditor extends Application
     private Person p;
     private Label label;
     private TextField nameField;
+    private TextField todoField;
 
     public static void main(String[] args) 
     {
@@ -46,6 +50,20 @@ public class PersonEditor extends Application
             updateLabel();
         });
 
+        // To dos
+        todoField = new TextField();
+        Button addToDoBtn = new Button("Add To Do");
+        addToDoBtn.setOnAction(event -> {
+            String toDoText = todoField.getText();
+            if (!toDoText.trim().isEmpty())
+            {
+                p.addTodo(new Todo(todoField.getText()));
+                updateLabel();
+                todoField.setText("");
+            }
+        });
+        
+
         int horizontalPadding = 5;
         HBox nameRow = new HBox(horizontalPadding, nameField, changeNameBtn);
         nameRow.setAlignment(Pos.CENTER);
@@ -53,8 +71,11 @@ public class PersonEditor extends Application
         HBox ageRow = new HBox(horizontalPadding, increaseAgeBtn, decreaseAgeBtn);
         ageRow.setAlignment(Pos.CENTER);
 
+        HBox todoRow = new HBox(horizontalPadding, todoField, addToDoBtn);
+        todoRow.setAlignment(Pos.CENTER);
+
         int verticalPadding = 5;
-        VBox root = new VBox(verticalPadding, label, nameRow, ageRow);
+        VBox root = new VBox(verticalPadding, label, nameRow, ageRow, todoRow);
         root.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(root, 300, 300);
@@ -79,10 +100,17 @@ class Person
 {
     String name;
     int age;
+    List<Todo> todos;
 
     Person(String name, int age) {
         this.name = name;
         this.age = age;
+        this.todos = new ArrayList<>();
+    }
+
+    public void addTodo(Todo task)
+    {
+        todos.add(task);
     }
 
     void increaseAge() {
@@ -98,7 +126,12 @@ class Person
     }
 
     @Override
-    public String toString() {
-        return this.name + ", aged: " + this.age;
+    public String toString() 
+    {
+        String str = this.name + ", aged: " + this.age;
+        for (Todo todo : todos) {
+            str += "\n    - " + todo;
+        }
+        return str;
     }
 }
