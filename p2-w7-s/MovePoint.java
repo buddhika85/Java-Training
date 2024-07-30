@@ -7,12 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MovePoint extends Application 
-{
+public class MovePoint extends Application {
 
     // Coordinates of our point
-    private int x = 0, y = 0;
-    private Label pointLbl;
+    private int x, y;
+
+    private Label lbl;
 
     public static void main(String[] args) 
     {
@@ -23,41 +23,41 @@ public class MovePoint extends Application
     public void start(Stage primaryStage) 
     {
         primaryStage.setTitle("Move point");
-        pointLbl = new Label();
-        updateLabel();
+        lbl = new Label();
+        updateLbl();
 
-        int horizontalPadding = 5, verticalPadding = 5;
+        int horizontalAlignment = 5;
 
-        // increase row
-        Button incXBtn = new Button("Increase X");
-        incXBtn.setOnAction(event -> {
+        // increment row
+        Button increaseXBtn = new Button("Increase X");
+        increaseXBtn.setOnAction(e -> {
             ++x;
-            updateLabel();
+            updateLbl();
         });
-        Button incYBtn = new Button("Increase Y");
-        incYBtn.setOnAction(event -> {
+        Button increaseYBtn = new Button("Increase Y");
+        increaseYBtn.setOnAction(e -> {
             ++y;
-            updateLabel();
+            updateLbl();
         });
-        HBox incBtnsRow = new HBox(horizontalPadding, incXBtn, incYBtn);
-        incBtnsRow.setAlignment(Pos.CENTER);
+        HBox increaseRow = new HBox(horizontalAlignment, increaseXBtn, increaseYBtn);
+        increaseRow.setAlignment(Pos.CENTER);
 
-        // decrease row
-        Button decXBtn = new Button("Decrease X");
-        decXBtn.setOnAction(event -> {
+        // decrement row
+        Button decreaseXBtn = new Button("Decrease X");
+        decreaseXBtn.setOnAction(e -> {
             --x;
-            updateLabel();
+            updateLbl();
         });
-        Button decYBtn = new Button("Decrease Y");
-        decYBtn.setOnAction(event -> {
+        Button decreaseYBtn = new Button("Decrease Y");
+        decreaseYBtn.setOnAction(e -> {
             --y;
-            updateLabel();
+            updateLbl();
         });
-        HBox decBtnsRow = new HBox(horizontalPadding, decXBtn, decYBtn);
-        decBtnsRow.setAlignment(Pos.CENTER);
+        HBox decreaseRow = new HBox(horizontalAlignment, decreaseXBtn, decreaseYBtn);
+        decreaseRow.setAlignment(Pos.CENTER);
 
-        // root
-        VBox root = new VBox(verticalPadding, pointLbl, incBtnsRow, decBtnsRow);
+        int verticalPadding = 5;
+        VBox root = new VBox(verticalPadding, lbl, increaseRow, decreaseRow);
         root.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(root, 300, 300);
@@ -65,34 +65,8 @@ public class MovePoint extends Application
         primaryStage.show();
     }
 
-    private void updateLabel() 
+    private void updateLbl() 
     {
-        pointLbl.setText("(" + x + ", " + y + ")");
+        lbl.setText("(" + x + "," + y + ")");
     }
-}
-
-
-class Point
-{
-    private int x, y;
-
-    public Point(int x, int y) 
-    {
-        this.x = x;
-        this.y = y;
-    }
-   
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    @Override
-    public String toString() {
-        return "(" + x + ", " + y + ")";
-    }
-
 }

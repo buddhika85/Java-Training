@@ -50,19 +50,17 @@ public class PersonEditor extends Application
             updateLabel();
         });
 
-        // To dos
+        // To Do
         todoField = new TextField();
-        Button addToDoBtn = new Button("Add To Do");
-        addToDoBtn.setOnAction(event -> {
-            String toDoText = todoField.getText();
-            if (!toDoText.trim().isEmpty())
+        Button addToDoBtn = new Button("Add to-do");
+        addToDoBtn.setOnAction(e -> {
+            String task = todoField.getText();
+            if (!task.isBlank())
             {
-                p.addTodo(new Todo(todoField.getText()));
+                p.addTodo(new ToDo(task));
                 updateLabel();
-                todoField.setText("");
-            }
+            }           
         });
-        
 
         int horizontalPadding = 5;
         HBox nameRow = new HBox(horizontalPadding, nameField, changeNameBtn);
@@ -71,11 +69,11 @@ public class PersonEditor extends Application
         HBox ageRow = new HBox(horizontalPadding, increaseAgeBtn, decreaseAgeBtn);
         ageRow.setAlignment(Pos.CENTER);
 
-        HBox todoRow = new HBox(horizontalPadding, todoField, addToDoBtn);
-        todoRow.setAlignment(Pos.CENTER);
+        HBox taskRow = new HBox(horizontalPadding, todoField, addToDoBtn);
+        taskRow.setAlignment(Pos.CENTER);
 
         int verticalPadding = 5;
-        VBox root = new VBox(verticalPadding, label, nameRow, ageRow, todoRow);
+        VBox root = new VBox(verticalPadding, label, nameRow, ageRow, taskRow);
         root.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(root, 300, 300);
@@ -100,17 +98,11 @@ class Person
 {
     String name;
     int age;
-    List<Todo> todos;
+    private List<ToDo> todos = new ArrayList<>();
 
     Person(String name, int age) {
         this.name = name;
         this.age = age;
-        this.todos = new ArrayList<>();
-    }
-
-    public void addTodo(Todo task)
-    {
-        todos.add(task);
     }
 
     void increaseAge() {
@@ -125,13 +117,32 @@ class Person
         this.name = name;
     }
 
-    @Override
-    public String toString() 
+    void addTodo(ToDo task)
     {
+        this.todos.add(task);
+    }
+
+    @Override
+    public String toString() {
         String str = this.name + ", aged: " + this.age;
-        for (Todo todo : todos) {
-            str += "\n    - " + todo;
+        for (ToDo toDo : todos) {
+            str += "\n" +  toDo;
         }
         return str;
     }
+}
+
+class ToDo
+{
+    private String task;
+
+    public ToDo(String task) {
+        this.task = task;
+    }
+
+    @Override
+    public String toString() {
+        return  task;
+    }
+    
 }
