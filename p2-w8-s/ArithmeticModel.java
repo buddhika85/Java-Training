@@ -7,36 +7,9 @@ public class ArithmeticModel
     private final SimpleIntegerProperty y = new SimpleIntegerProperty();
     private final SimpleIntegerProperty sum = new SimpleIntegerProperty();
 
-    // changes
-    private final SimpleIntegerProperty difference = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty product = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty quotient = new SimpleIntegerProperty();
-
     public ArithmeticModel()
     {
         sum.bind(x.add(y));         // sum always = x's current value + y's current value
-        difference.bind(x.subtract(y));
-        product.bind(x.multiply(y));
-        //quotient.bind(x.divide(y));
-
-        y.addListener((obsValue, oldValue, newValue ) -> {
-            setQuatient(newValue);
-        });
-        x.addListener((obsValue, oldValue, newValue ) -> {
-            setQuatient(newValue);
-        });
-    }
-
-    private void setQuatient(Number newValue) {
-        int yInt = newValue.intValue();
-        if (yInt == 0)
-        {
-            quotient.set(0);        // shwoing a default
-        }
-        else
-        {   quotient.set(x.intValue() / yInt);
-
-        }
     }
 
     // for X getters /accessors
@@ -76,30 +49,5 @@ public class ArithmeticModel
 
     public final int getSum() {
         return this.sumProperty().get();
-    }
-
-    // other getters
-    public final SimpleIntegerProperty differenceProperty() {
-        return this.difference;
-    }
-
-    public final int getDifference() {
-        return this.differenceProperty().get();
-    }
-
-    public final SimpleIntegerProperty productProperty() {
-        return this.product;
-    }
-
-    public final int getproduct() {
-        return this.productProperty().get();
-    }
-
-    public final SimpleIntegerProperty quotientProperty() {
-        return this.quotient;
-    }
-
-    public final int getquotient() {
-        return this.quotientProperty().get();
     }
 }

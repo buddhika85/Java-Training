@@ -16,10 +16,6 @@ public class ArithmeticView
     private TextField xField;
     private TextField yField;
     private Label sumLabel;
-    private Label differenceLabel;
-    private Label productLabel;
-    private Label quotientLabel;
-
 
     // cotroller and view object references
     private ArithmeticController controller;
@@ -51,14 +47,10 @@ public class ArithmeticView
         model.yProperty().addListener((obs, oldY, newY) -> updateIfNeeded(newY, yField));
 
         sumLabel.textProperty().bind(model.sumProperty().asString());
-        differenceLabel.textProperty().bind(model.differenceProperty().asString());
-        productLabel.textProperty().bind(model.productProperty().asString());
-        quotientLabel.textProperty().bind(model.quotientProperty().asString());
     }
 
     // If the given field has changed, update its text value.
-    private void updateIfNeeded(Number value, TextField field) 
-    {
+    private void updateIfNeeded(Number value, TextField field) {
         String s = value.toString();
         if (!field.getText().equals(s)) {
             field.setText(s);
@@ -83,9 +75,6 @@ public class ArithmeticView
         configTextFieldForInts(yField);
 
         sumLabel = new Label();
-        differenceLabel = new Label();
-        productLabel = new Label();
-        quotientLabel = new Label();
 
         HBox xRow = new HBox(5, new Label("X:"), xField);
         xRow.setAlignment(Pos.CENTER);
@@ -96,16 +85,7 @@ public class ArithmeticView
         HBox sumRow = new HBox(5, new Label("Sum:"), sumLabel);
         sumRow.setAlignment(Pos.CENTER);
 
-        HBox diffRow = new HBox(5, new Label("Difference:"), differenceLabel);
-        diffRow.setAlignment(Pos.CENTER);
-
-        HBox prodRow = new HBox(5, new Label("Product:"), productLabel);
-        prodRow.setAlignment(Pos.CENTER);
-
-        HBox quotientRow = new HBox(5, new Label("Quotient:"), quotientLabel);
-        quotientRow.setAlignment(Pos.CENTER);
-
-        view.getChildren().addAll(xRow, yRow, sumRow, diffRow, prodRow, quotientRow);
+        view.getChildren().addAll(xRow, yRow, sumRow);
     }
 
     // create root node
@@ -118,8 +98,7 @@ public class ArithmeticView
     // You may skip looking at this method. Its purpose is to ensure that
     // only integers can be entered into the X and Y text fields. You may find this
     // useful in your project B!
-    private void configTextFieldForInts(TextField field) 
-    {
+    private void configTextFieldForInts(TextField field) {
         field.setTextFormatter(new TextFormatter<Integer>((Change c) -> {
             // "-?\\d*" is called a regular expression. For those who are curious:
             //
