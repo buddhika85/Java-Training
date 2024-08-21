@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "GraphicsExample",
+            "request": "launch",
+            "mainClass": "GraphicsExample",
+            "projectName": "p2@home-sprites_1-Transition_d6f18ec3",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
