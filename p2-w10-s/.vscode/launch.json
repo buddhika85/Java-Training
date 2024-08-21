@@ -2,10 +2,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Circles",
+            "name": "GraphicsExample",
             "request": "launch",
-            "mainClass": "Circles",
-            "projectName": "p2@Home_5548736c",
+            "mainClass": "GraphicsExample",
+            "projectName": "p2@home-sprites_TA_dcedf31f",
             "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS - 2024 March\\P2\\javafx-sdk-22\\lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
