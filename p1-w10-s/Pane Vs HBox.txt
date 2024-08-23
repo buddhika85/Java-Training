@@ -1,0 +1,53 @@
+
+Pane
+-----
+General Purpose: Pane is a base class for layout panes in JavaFX. 
+It offers no automatic layout behavior. 
+It simply allows you to manually position child nodes using their layoutX, layoutY, prefWidth, and prefHeight properties.
+
+Use Case: 
+Use a Pane when you need absolute positioning of your child nodes. 
+It's useful when you want full control over the placement of nodes without any automated layout adjustments.
+
+Customization: 
+Since Pane does not impose any layout rules, you need to manually manage the positions of its children.
+
+
+Interpolators
+--------------
+In JavaFX, interpolators are used to control the rate of change during animations. They determine how the values of an animated property are calculated over time, making animations appear smooth, gradual, or abrupt, depending on the chosen interpolator
+
+Visualizing the Interpolators:
+LINEAR: Think of a car moving at a constant speed.
+EASE_IN: A car slowly accelerating from a stop.
+EASE_OUT: A car braking gently to a stop.
+EASE_BOTH: A car accelerating from a stop, cruising, and then gently braking.
+DISCRETE: A car stopping abruptly and then moving again without any smooth transition.
+
+Summary:
+LINEAR: Constant rate of change.
+EASE_IN: Slow start, fast finish.
+EASE_OUT: Fast start, slow finish.
+EASE_BOTH: Slow start, fast middle, slow finish.
+DISCRETE: Abrupt changes with no smooth transition.
+
+
+
+swirlView.setX(x - swirlView.getBoundsInParent().getWidth() / 2);
+swirlView.setX(50 - 5 / 2);
+swirlView.setX(47.5);
+
+swirlView.setY(y - swirlView.getBoundsInParent().getHeight() / 2);
+
+----------------
+ c (x:50, 50)
+
+
+
+
+
+----------------
+
+
+
+
