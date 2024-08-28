@@ -1,14 +1,14 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Shapes
 {
-    private LinkedList<Shape> shapes = new LinkedList<Shape>();
+    private List<Shape> shapes = new ArrayList<Shape>();
     
     public Shapes()
     {         
         shapes.add(new Rectangle(10, 5));
-        shapes.add(new Circle(10));
-        displayResults();
+        shapes.add(new Circle(10));        
     }
     
     private void displayResults()
@@ -26,5 +26,9 @@ public class Shapes
             
             System.out.println("\n");
         }
+    }
+
+    public static void main(String[] args) {
+        new Shapes().displayResults();
     }
 }

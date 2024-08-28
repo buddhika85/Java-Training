@@ -55,6 +55,6 @@ public class Rectangle implements Shape
     @Override
     public String toString()
     {
-        return "Rectangle with L => " + length + "Width => " + width; 
+        return "Rectangle with Length => " + length + "Width => " + width; 
     }
 }
