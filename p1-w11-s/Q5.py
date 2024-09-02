@@ -6,6 +6,12 @@
 # print(total / 3)
 
 
-print(10/3)
-print(10//3)
-print(10.0//3)
+# print(10/3)
+# print(10//3)
+# print(10.0//3)
+
+a = {'F', 'P'}
+b = {'P','D', 'HD'}
+c = a & b
+d = c | a
+print(d)
