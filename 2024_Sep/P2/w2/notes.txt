@@ -1,0 +1,48 @@
+* Constants
+	Values cannot change during the run time (cannot be reassigned after initial assignment of its value)
+	final keyword
+	SNAKE_CASE convention
+
+* static constant
+	cannot be changed and the value is shared among all instance of the class
+
+
+
+Enums/Enumerations
+
+* enums are a special type of class (a reference type) that represents a group of constants
+* parent of enums created in Java is - java.lang.Enum. They implicitly extend - java.lang.Enum class. 
+* Java enumerations allow us to impose restrictions on the range of values variables can take.
+* Enum constructors must only be private 
+* EnumName.values() ---> returns a list of all possible Enum values, it is a static method
+* this.name() ---> Returns the name of this enum constant, exactly as declared in its enum declaration.
+
+* Use constants and enums in your Java code liberally! (as much as possible in the correct context)
+	They're simple but really help to make your code more robust (correctness) and readable.
+
+
+Overloading
+
+* Method overloading allows you to write multiple methods with the same name, but with different parameters (differing in type and/or number). 
+* It helps to increase the readability of the program and allows methods to perform similar actions with different inputs.
+
+* When the Java compiler analyses the parameter lists for overloaded methods, it totally ignores the name of the parameters.
+* parameter names are for humans, Java does not care about the name, it only considers the data type so that it can be executed in the run time if called.
+
+* Java compiler also disregards the return type of the methods when considering overloading.
+
+int add(int a, int b)
+{
+	return a + b;
+}
+
+// error as same param list for Java
+double add(int x, int y)
+{
+	return x + y;
+}
+
+* println(String), println(double), println(int)...
+
+
+	
