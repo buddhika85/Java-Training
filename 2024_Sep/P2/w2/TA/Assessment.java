@@ -78,7 +78,7 @@ class Assessment
     }
 }
 
-class Student
+ class Student
 {
     ArrayList<Assessment> assessments =  new ArrayList<>();
 
