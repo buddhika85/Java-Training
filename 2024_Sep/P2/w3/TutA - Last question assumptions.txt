@@ -1,0 +1,9 @@
+
+* Wraith
+	- Assume it does not have a weapon
+	- Its an AirBourne unit
+	- It can cause 8 ground damage
+	- It can cause 20 air damage
+
+* Soldiers
+	- All are ground based units
