@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 
-import javax.management.Query;
-
 
 enum Weapon {
     MACHINE_GUN(6, 6, 4),
-    FLAME_THROWER(8, 0, 2),
-    C_10_RIFLE(10, 10, 7);
+    FLAME_THROWER(8, 0, 2);
 
     // Amount of damage that can be inflicted on ground-base enemies
     private int groundDamage;
@@ -40,19 +37,7 @@ enum Weapon {
                 " - Attack range: " + this.attackRange;
     }
 }
-
-enum UnitType
-{
-    GROUND_BASED_UNIT,
-    AIRBOURNE_UNIT;
-}
-
-class TerranUnit
-{
-    protected UnitType unitType;
-}
-public class Soldier extends TerranUnit
-{
+public class Soldier {
     private final int MAX_HEALTH;
     private final Weapon WEAPON;
 
@@ -73,31 +58,6 @@ public class Soldier extends TerranUnit
 
     int getAirDamage() {
         return this.WEAPON.getAirDamage();
-    }
-}
-
-class Wrait extends TerranUnit
-{
-    public Wrait() 
-    {
-        // airbourne unit
-        super.unitType = UnitType.AIRBOURNE_UNIT;
-    }
-}
-
-class Ghost extends Soldier
-{
-    private boolean isClockActive;
-
-    Ghost()
-    {
-        super(Weapon.C_10_RIFLE, 45, 4);
-        this.isClockActive = false;
-    }
-
-    public void activateCloak()
-    {
-        this.isClockActive = true;          // invisible
     }
 }
 
@@ -155,36 +115,27 @@ class Firebat extends Soldier {
 }
 
 class Squad {
-    private ArrayList<TerranUnit> members;
+    private ArrayList<Soldier> members;
 
     Squad() {
         this.members = new ArrayList<>();
     }
 
-    void addSoldier(TerranUnit terranUnit) 
-    {
-        this.members.add(terranUnit);
+    void addSoldier(Soldier soldier) {
+        this.members.add(soldier);
     }
 
-    int totalGroundAttackPower() 
-    {
+    int totalGroundAttackPower() {
         int total = 0;
-        for (TerranUnit t : this.members) 
-        {
-            if (t instanceof Soldier)
-            {
-                Soldier s = (Soldier) t;
-                total += s.getGroundDamage();
-            }
+        for (Soldier s : this.members) {
+            total += s.getGroundDamage();
         }
 
         return total;
     }
 
-    void activateStimpackForMarines() 
-    {
-        for (TerranUnit s : this.members) 
-        {
+    void activateStimpackForMarines() {
+        for (Soldier s : this.members) {
             // Here is where we check for `Marine` type
             if (s instanceof Marine) {
                 // We need to cast `s` to the `Marine` type.
@@ -194,41 +145,20 @@ class Squad {
         }
     }
 
-    void cloakAllGhosts()
-    {
-        for (TerranUnit s : this.members) 
-        {           
-            if (s instanceof Ghost) 
-            {               
-                Ghost g = (Ghost) s;
-                g.activateCloak();
-            }
-        }
-    }
-
     void printSquadComposition()
     {
         int marineCount = 0;
         int firebatCount = 0;
-        int ghostCount = 0;
-        int wraithCount = 0;
-
-        for (TerranUnit soldier : members) 
+        for (Soldier soldier : members) 
         {
             if (soldier instanceof Marine)
                 ++marineCount;
             if (soldier instanceof Firebat)
-                ++firebatCount;   
-            if (soldier instanceof Ghost)
-                ++ghostCount;  
-            if (soldier instanceof Wrait)
-                ++wraithCount;    
+                ++firebatCount;    
         }
         
         System.out.println("Squad composition: ");
         System.out.println("\tMarines - " + marineCount);
         System.out.println("\tFirebats - " + firebatCount);
-        System.out.println("\tGhosts - " + ghostCount);
-        System.out.println("\tWraiths - " + wraithCount);
     }
 }
