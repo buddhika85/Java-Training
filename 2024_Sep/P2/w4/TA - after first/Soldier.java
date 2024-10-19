@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-import javax.management.Query;
-
-
 enum Weapon {
     MACHINE_GUN(6, 6, 4),
     FLAME_THROWER(8, 0, 2),
@@ -47,11 +44,15 @@ enum UnitType
     AIRBOURNE_UNIT;
 }
 
-class TerranUnit
+abstract class TerranUnit
 {
     protected UnitType unitType;
+
+    abstract int getGroundDamage();
+    abstract int getAirDamage();
 }
-public class Soldier extends TerranUnit
+
+public abstract class Soldier extends TerranUnit
 {
     private final int MAX_HEALTH;
     private final Weapon WEAPON;
@@ -67,21 +68,39 @@ public class Soldier extends TerranUnit
         this.speed = speed;
     }
 
+    @Override
     int getGroundDamage() {
         return this.WEAPON.getGroundDamage();
     }
 
+    @Override
     int getAirDamage() {
         return this.WEAPON.getAirDamage();
     }
 }
 
-class Wrait extends TerranUnit
+class Wraith extends TerranUnit
 {
-    public Wrait() 
+    private final int MAX_HEALTH;   
+    private int currentHealth;
+    // Measures how fast the soldier can move
+    private int speed;
+
+    Wraith() 
     {
-        // airbourne unit
-        super.unitType = UnitType.AIRBOURNE_UNIT;
+        this.MAX_HEALTH = 120;       
+        this.currentHealth = MAX_HEALTH;
+        this.speed = 7;
+    }
+
+    @Override
+    int getGroundDamage() {
+        return 8;
+    }
+
+    @Override
+    int getAirDamage() {
+        return 20;
     }
 }
 
@@ -171,13 +190,8 @@ class Squad {
         int total = 0;
         for (TerranUnit t : this.members) 
         {
-            if (t instanceof Soldier)
-            {
-                Soldier s = (Soldier) t;
-                total += s.getGroundDamage();
-            }
+           total += t.getGroundDamage();
         }
-
         return total;
     }
 
@@ -221,7 +235,7 @@ class Squad {
                 ++firebatCount;   
             if (soldier instanceof Ghost)
                 ++ghostCount;  
-            if (soldier instanceof Wrait)
+            if (soldier instanceof Wraith)
                 ++wraithCount;    
         }
         
