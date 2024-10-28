@@ -1,7 +1,4 @@
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 abstract class AudioTrack {
     int durationInSeconds;
@@ -128,25 +125,50 @@ enum PodcastGenre {
 
 class PlayList {
     List<Integer> list;
+
+    public PlayList(List<Integer> list) {
+        this.list = list;
+    }
+
+    @Override
+    public String toString() {
+        return  list.toString();
+    }
+
+    static PlayList generateRandomPlayList(int numberOfTracksInLibrary, int playListSize)
+    {
+        ArrayList<Integer> libraryIndexes = new ArrayList<>();
+        for (int i = 0; i < numberOfTracksInLibrary; i++) {
+            libraryIndexes.add(i);
+        }
+
+        Collections.shuffle(libraryIndexes);
+        return new PlayList(libraryIndexes.subList(0, playListSize));   
+    }
+}
+
+interface ListenPlayList {
+    void listenToPlayList(PlayList playList);
 }
 
 interface ListPodcasts {
-    ArrayList<Podcast> listPodcasts();
+    List<Podcast> listPodcasts();
 }
 
 interface ListSongs {
     // List all songs
-    ArrayList<Song> listSongs();
+    List<Song> listSongs();
 
     // List songs by artist
-    ArrayList<Song> listSongs(String artist);
+    List<Song> listSongs(String artist);
 }
 
 interface PlaySongs {
     void playSongs(ArrayList<Song> songs);
 }
 
-class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
+class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs, ListenPlayList 
+{
     AudioTrack[] library;
     PlayMode currentPlayMode;
 
@@ -195,28 +217,69 @@ class MusicPlayer implements ListPodcasts, ListSongs, PlaySongs {
     @Override
     public void playSongs(ArrayList<Song> songs) {
         if (this.currentPlayMode == PlayMode.LINEAR) {
-            for (Song s : songs) {
-                s.play();
-            }
+            play(songs);
         } else if (this.currentPlayMode == PlayMode.REPEAT) {
             while (true) {
-                for (Song s : songs) {
-                    s.play();
-                }
+                play(songs);
                 System.out.println("Would you like to continue (y/n)?");
                 if (In.nextChar() == 'n') {
                     break;
                 }
             }
         } else {
-            // Randomised playback. There are a couple of ways to do this.
-            // We'll randomly pick a song out of the ArrayList, then remove it.
-            while (!songs.isEmpty()) {
-                Random rand = new Random();
-                int choice = rand.nextInt(songs.size());
-                songs.get(choice).play();
-                songs.remove(choice);
+            // // Randomised playback. There are a couple of ways to do this.
+            // // We'll randomly pick a song out of the ArrayList, then remove it.
+            // while (!songs.isEmpty()) {
+            //     Random rand = new Random();
+            //     int choice = rand.nextInt(songs.size());
+            //     songs.get(choice).play();
+            //     songs.remove(choice);
+            // }
+
+            Collections.shuffle(songs);
+            play(songs);
+        }
+    }
+
+   
+
+    @Override
+    public void listenToPlayList(PlayList playList) 
+    {
+        if (this.currentPlayMode == PlayMode.LINEAR) {
+            play(playList);
+        } else if (this.currentPlayMode == PlayMode.REPEAT) {
+            while (true) {
+                play(playList);
+                System.out.println("Would you like to continue (y/n)?");
+                if (In.nextChar() == 'n') {
+                    break;
+                }
             }
+        } else {
+            // // Randomised playback. There are a couple of ways to do this.
+            // // We'll randomly pick a song out of the ArrayList, then remove it.
+            // while (!songs.isEmpty()) {
+            //     Random rand = new Random();
+            //     int choice = rand.nextInt(songs.size());
+            //     songs.get(choice).play();
+            //     songs.remove(choice);
+            // }
+
+            Collections.shuffle(playList.list);
+            play(playList);
+        }
+    }
+
+    private void play(PlayList playList) {
+        for (int indexOfLib : playList.list) {
+            this.library[indexOfLib].play();
+        }
+    }
+
+    private void play(ArrayList<Song> songs) {
+        for (Song s : songs) {
+            s.play();
         }
     }
 
@@ -264,10 +327,15 @@ class TestLibrary {
 
         MusicPlayer mp = new MusicPlayer(library, PlayMode.SHUFFLE);
 
-        ArrayList<Song> songs = new ArrayList<>();
-        songs.add((Song) library[3]);
-        songs.add((Song) library[5]);
-        songs.add((Song) library[6]);
-        mp.playSongs(songs);
+        // ArrayList<Song> songs = new ArrayList<>();
+        // songs.add((Song) library[3]);
+        // songs.add((Song) library[5]);
+        // songs.add((Song) library[6]);
+        // mp.playSongs(songs);
+
+
+        PlayList playList = PlayList.generateRandomPlayList(library.length, 10);
+        System.out.println(playList);
+        mp.listenToPlayList(playList);
     }
 }
