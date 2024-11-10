@@ -7,11 +7,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 // The top-level class of a JavaFX app must extend the `Application` class.
-public class First extends Application {
+public class Second extends Application {
     public static void main(String[] args) {
         // To launch the app, we call the `launch` method, which is static and
         // defined in the `Application` class.
-        First.launch(args);
+        Second.launch(args);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class First extends Application {
 
         // Here we set `label` and `helloButton` as children nodes of the VBox.
         // Note how `label` comes before `helloButton`.
-        root.getChildren().addAll(label, helloButton);
+        root.getChildren().addAll(helloButton, label);
 
         // This method call aligns the VBox to sit right in the centre of the
         // scene.

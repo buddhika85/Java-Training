@@ -2,6 +2,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SecondNested",
+            "request": "launch",
+            "mainClass": "SecondNested",
+            "projectName": "code_7_home_13bf1e5a",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Second",
+            "request": "launch",
+            "mainClass": "Second",
+            "projectName": "code_7_home_13bf1e5a",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\w7\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "First",
             "request": "launch",
             "mainClass": "First",
