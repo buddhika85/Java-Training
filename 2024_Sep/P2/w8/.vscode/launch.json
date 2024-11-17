@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ExampleWithEvents",
+            "request": "launch",
+            "mainClass": "ExampleWithEvents",
+            "projectName": "@home_w8_c3f5ce9f",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ExampleWithPropertyBinding",
+            "request": "launch",
+            "mainClass": "ExampleWithPropertyBinding",
+            "projectName": "@home_w8_c3f5ce9f",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ButtonClickPropListeners",
+            "request": "launch",
+            "mainClass": "ButtonClickPropListeners",
+            "projectName": "@home_w8_c3f5ce9f",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ButtonClick",
+            "request": "launch",
+            "mainClass": "ButtonClick",
+            "projectName": "@home_w8_c3f5ce9f",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
