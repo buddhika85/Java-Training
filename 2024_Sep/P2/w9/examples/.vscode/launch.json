@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "PersonTableApp",
+            "request": "launch",
+            "mainClass": "PersonTableApp",
+            "projectName": "examples_d038364e",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonListAddRemove",
+            "request": "launch",
+            "mainClass": "PersonListAddRemove",
+            "projectName": "examples_d038364e",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonListApp",
+            "request": "launch",
+            "mainClass": "PersonListApp",
+            "projectName": "examples_d038364e",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "PersonForm",
+            "request": "launch",
+            "mainClass": "PersonForm",
+            "projectName": "examples_d038364e",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "MultiWindow",
+            "request": "launch",
+            "mainClass": "MultiWindow",
+            "projectName": "examples_d038364e",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
