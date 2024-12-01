@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "RectangleAnimate",
+            "request": "launch",
+            "mainClass": "RectangleAnimate",
+            "projectName": "Examples_9f85b5e2",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "CircleAnimate",
+            "request": "launch",
+            "mainClass": "CircleAnimate",
+            "projectName": "Examples_9f85b5e2",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Rectangles",
+            "request": "launch",
+            "mainClass": "Rectangles",
+            "projectName": "Examples_9f85b5e2",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "CirclesTwo",
+            "request": "launch",
+            "mainClass": "CirclesTwo",
+            "projectName": "Examples_9f85b5e2",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Circles",
+            "request": "launch",
+            "mainClass": "Circles",
+            "projectName": "Examples_9f85b5e2",
+            "vmArgs": "--module-path \"c:\\BUDDHIKA\\UTS\\UTS 2024 Sep\\P2\\openjfx-21.0.4_windows-x64_bin-sdk\\javafx-sdk-21.0.4\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
